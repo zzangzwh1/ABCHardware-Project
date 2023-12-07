@@ -50,7 +50,30 @@ main {
     justify-content: center;
     align-items: center;
 }
+.buttons {
+    width: 400px;
+    height: 30px; /* Specify an appropriate height */
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
 
+    .buttons:hover {
+        cursor: pointer;
+        color: red;
+    }
+.inputText{
+    width:400px;
+    height:30px;
+}
+.messages {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.modelMessage{
+    color:red;
+}
 footer {
     background-color: dimgrey;
     text-align: center;

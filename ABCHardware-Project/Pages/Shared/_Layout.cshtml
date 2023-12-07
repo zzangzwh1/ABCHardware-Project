@@ -6,6 +6,7 @@
     <title>@ViewData["Title"]</title>
     <link rel="icon" href="~/images/abc.png" type="image/x-icon" />
     <link rel="stylesheet" href="~/css/StyleSheet.css" />
+    @RenderSection("AddCustomerscriptContent",required:false)
 </head>
 <body>
     <header>
@@ -16,10 +17,10 @@
     <nav>
         <ul>
             <li><a href="~/Index">Home</a></li>
-            <li><a href="">Add Item</a></li>
+            <li><a href="~/Additem">Add Item</a></li>
             <li><a href="">Update Item</a></li>
             <li><a href="">Delete Item</a></li>
-            <li><a href="">Add Customer</a></li>
+            <li><a href="~/AddCustomer">Add Customer</a></li>
             <li><a href="">Delete Customer</a></li>
             <li><a href="">Process Sale</a></li>
 
@@ -28,6 +29,8 @@
     <main>
         @RenderBody()
         @RenderSection("indexContent",required:false)
+        @RenderSection("AddItemContent",required:false)
+        @RenderSection("AddCustomerContent",required:false)
     </main>
 
     <footer>

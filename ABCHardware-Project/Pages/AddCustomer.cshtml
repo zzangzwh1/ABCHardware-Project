@@ -1,0 +1,76 @@
+﻿@page
+@model ABCHardware_Project.Pages.AddCustomerModel
+@{
+    ViewData["Title"] = "Add Customer";
+}
+@section AddCustomerscriptContent
+    {
+    <script src="~/libraries/jquery/jquery.js"> </script>
+    <script src="~/libraries/jquery-validate/jquery.validate.js"></script>
+    <script src="~/libraries/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
+
+@section AddCustomerContent{
+
+    <section class="divHeader">
+        <h1> Add Customer </h1>
+        <form name="SampleForm" method="post">
+            <div>
+                <br />
+                <input asp-for="FirstName" class="inputText" placeholder="Insert First Name" class="inputText" value="@Model.FirstName" />
+            </div>
+            <div>
+                <br />
+                <input asp-for="LastName" class="inputText" placeholder="Insert Last Name" class="inputText" value="@Model.LastName" />
+
+
+            </div>
+            <div>
+                <br />
+                <input asp-for="Address" class="inputText" placeholder="Insert Address" class="inputText" value="@Model.Address" />
+
+
+            </div>
+            <div>
+                <br />
+                <input asp-for="City" class="inputText" placeholder="Insert City" class="inputText" value="@Model.City" />
+
+
+            </div>
+            <div>
+                <br />
+                <input asp-for="Province" class="inputText" placeholder="Insert Province" class="inputText" value="@Model.Province" />
+
+
+            </div>
+            <div>
+                <br />
+                <input asp-for="PostalCode" class="inputText" placeholder="Insert PostalCode" class="inputText" value="@Model.PostalCode" />
+
+
+            </div>
+            <div>
+                <br />
+                <input type="submit" name="Submit" value="Submit" class="buttons">
+            </div>
+            <section class="messages">
+                <br />
+                <span asp-validation-for="FirstName" class="modelMessage"></span>
+                <span asp-validation-for="LastName" class="modelMessage"></span>
+                <span asp-validation-for="Address" class="modelMessage"></span>
+                <span asp-validation-for="City" class="modelMessage"></span>
+                <span asp-validation-for="Province" class="modelMessage"></span>
+                <span asp-validation-for="PostalCode" class="modelMessage"></span>
+            </section>
+            
+        </form>
+
+    </section>
+
+    <section class="messages">
+       
+
+        <h3 class="modelMessage">@Model.Message</h3>
+    </section>
+
+}
