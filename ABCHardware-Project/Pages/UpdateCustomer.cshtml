@@ -3,6 +3,13 @@
 @{
     ViewData["Title"] = "Update Customer";
 }
+
+@section UpdateStudentscriptContent
+    {
+    <script src="~/libraries/jquery/jquery.js"> </script>
+    <script src="~/libraries/jquery-validate/jquery.validate.js"></script>
+    <script src="~/libraries/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
 @section UpdateCustomerContent{
 
     <section class="divHeader">
@@ -11,12 +18,12 @@
             <form name="SampleForm" method="post">
                 <div>
                     <br />
-                    <h3 class="modelMessage">Please insert Last Name for finding user information</h3>
+                    <p class="modelMessage">Please insert First Name or Last Name for finding user information</p>
                     <input asp-for="FindLastName" class="inputText" class="inputText" value="@Model.FindLastName" />
                 </div>
                 <div>
                     <br />
-                    <input type="submit" name="Submit" value="Find Customer" class="buttons">
+                    <input type="submit" name="Submit" value="Find Customer" asp-page-asp-page-handler="FindCustomer" class="buttons">
                 </div>
             </form>
         </div>

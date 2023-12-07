@@ -6,7 +6,7 @@ namespace ABCHardware_Project.TechService
     public class Customer
     {
         private static string? _connectionString;
-      
+
         public Customer()
         {
             // Constructor Logic
@@ -21,7 +21,7 @@ namespace ABCHardware_Project.TechService
         #region Add Customer
         public bool AddCustomer(Models.Customer customer)
         {
-           
+
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
@@ -57,6 +57,61 @@ namespace ABCHardware_Project.TechService
             }
             return true;
         }
+        #endregion
+
+        #region Find Customer
+        public List<Customer> FindStudentWtihName(string firstOrLastName)
+        {
+
+            List<Customer> studentInfo = new List<Customer>();
+
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand("FindCustomer", conn))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    try
+                    {
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+
+                                while (reader.Read())
+                                {
+                                    //string? programCodes = "";
+                                    for (int i = 0; i < reader.FieldCount; i++)
+                                    {
+                                        studentInfo.Add((Customer)reader[i]);
+
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"There are No Student exists with that student ID try other Student ID");
+                            }
+
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error Occurred - {ex.Message}");
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+            return studentInfo;
+        }
+
         #endregion
     }
 }
