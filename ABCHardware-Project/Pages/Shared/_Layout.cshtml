@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" href="~/images/abc.png" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+</head>
+<body>
+    <header>
+
+        <h1>BAIS3150 ABC Hardward Project</h1>
+
+    </header>
+    <nav>
+        <ul>
+            <li><a href="~/Index">Home</a></li>
+            <li><a href="">Add Item</a></li>
+            <li><a href="">Update Item</a></li>
+            <li><a href="">Delete Item</a></li>
+            <li><a href="">Add Customer</a></li>
+            <li><a href="">Delete Customer</a></li>
+            <li><a href="">Process Sale</a></li>
+
+        </ul>
+    </nav>
+    <main>
+        @RenderBody()
+        @RenderSection("indexContent",required:false)
+    </main>
+
+    <footer>
+
+        <p>BAIS3150ABC Hardward Project created by Mike Wonhyuk Cho</p>
+    </footer>
+</body>
+</html>

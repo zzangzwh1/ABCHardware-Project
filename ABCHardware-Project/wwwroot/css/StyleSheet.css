@@ -1,0 +1,63 @@
+﻿header {
+    background-color: dimgrey;
+    text-align: center;
+    width: 100%;
+    height: 7%;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    bottom: 10%;
+}
+
+nav {
+    background-color: dimgrey;
+    text-align: center;
+    width: 100%;
+    height: 5%;
+    position: fixed;
+    top: 7%;
+    left: 0%;
+}
+
+    nav * {
+        display: inline;
+    }
+
+    nav li {
+        margin: 3%;
+    }
+
+        nav li a {
+            color: #000;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+            nav li a:hover {
+                color: white;
+            }
+main {
+    background-color: lightblue;
+    left: 0%;
+    width: 100%;
+    height: 90%;
+    position: fixed;
+    top: 12%;
+    bottom: 95%;
+}
+.divHeader {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    background-color: dimgrey;
+    text-align: center;
+    width: 100%;
+    height: 10%;
+    position: fixed;
+    left: 0%;
+    top: 95%;
+    bottom: 100%;
+}
