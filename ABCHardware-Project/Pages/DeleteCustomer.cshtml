@@ -1,0 +1,81 @@
+﻿@page
+@model ABCHardware_Project.Pages.DeleteCustomerModel
+@{
+    ViewData["Title"] = "Delete Customer";
+}
+@section DeleteCustomerscriptContent
+    {
+    <script src="~/libraries/jquery/jquery.js"> </script>
+    <script src="~/libraries/jquery-validate/jquery.validate.js"></script>
+    <script src="~/libraries/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
+
+@section DeleteCustomerContent
+    {
+    <section class="divHeader">
+        <h1> Delete Customer </h1>
+        <div>
+            <form name="SampleForm" method="post">
+                <div>
+                    <br />
+                    <p class="modelMessage">Please insert First Name or Last Name for finding user information</p>
+                    <input asp-for="FindLastName" class="inputText" class="inputText" />
+                </div>
+
+                <div>
+                    <br />
+                    <input type="submit" name="Submit" asp-page-handler="FindCustomer" value="Find Customer" class="buttons">
+                </div>
+
+            </form>
+
+
+        </div>
+        <br />
+        <br />
+
+        <section class="messages">
+
+            <h3 class="modelMessage">@Model.Message</h3>
+
+        </section>
+
+
+        @if (Model.customers != null)
+        {
+            <form name="DeleteSample" method="post">
+                <table border="1">
+                    <tr>
+                        <td>Customer ID </td>
+                        <td>FirstName </td>
+                        <td>Last Name</td>
+                        <td>Address</td>
+                        <td>City</td>
+                        <td>Province</td>
+                        <td>PostalCode</td>
+
+                    </tr>
+
+                    @foreach (var val in Model.customers)
+                    {
+
+                        <tr>
+                            <td><input asp-for="_CustomerID" value="@val.CustomerID" readonly /></td>
+                            <td><input asp-for="_FirstName" value="@val.FirstName" /></td>
+                            <td><input asp-for="_LastName" value="@val.LastName" /></td>
+                            <td><input asp-for="_Address" value="@val.Address" /></td>
+                            <td><input asp-for="_City" value="@val.City" /></td>
+
+                            <td><input asp-for="_Province" value="@val.Province" /></td>
+                            <td><input asp-for="_PostalCode" value="@val.PostalCode" /></td>
+                            <td><input type="submit" name="Delete" value="Delete" class="buttons" asp-page-handler="Delete"></td>
+                        </tr>
+                    }
+                </table>
+
+               \
+            </form>
+        }
+    </section>
+
+}

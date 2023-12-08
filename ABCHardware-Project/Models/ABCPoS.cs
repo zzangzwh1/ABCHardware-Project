@@ -1,6 +1,6 @@
 ﻿using ABCHardware_Project.Models;
 using ABCHardware_Project.TechService;
-using System.Reflection.Metadata.Ecma335;
+
 
 namespace ABCHardware_Project.Models
 {
@@ -21,10 +21,24 @@ namespace ABCHardware_Project.Models
 
             return customers;
         }
+        public Models.Customer GetCustomerInfo(int customerID)
+        {
+            TechService.Customer customer = new TechService.Customer();
+            Models.Customer customerInformation = customer.GetCustomerInfo(customerID);
+            return customerInformation;
+        }
         public bool UpdateCustomer(Models.Customer customers)
         {
             TechService.Customer customer = new TechService.Customer();
             bool isSuccess = customer.UpdateCustomers(customers);
+
+
+            return isSuccess;
+        }
+        public bool DeleteCustomer(int customerID)
+        {
+            TechService.Customer customer = new TechService.Customer();
+            bool isSuccess = customer.DeleteCustomers(customerID);
 
 
             return isSuccess;

@@ -7,7 +7,8 @@
     <link rel="icon" href="~/images/abc.png" type="image/x-icon" />
     <link rel="stylesheet" href="~/css/StyleSheet.css" />
     @RenderSection("AddCustomerscriptContent",required:false)
-    @RenderSection("UpdateStudentscriptContent",required:false)
+    @RenderSection("UpdateCustomerscriptContent",required:false)
+    @RenderSection("DeleteCustomerscriptContent",required:false)
 </head>
 <body>
     <header>
@@ -23,7 +24,7 @@
             <li><a href="">Delete Item</a></li>
             <li><a href="~/AddCustomer">Add Customer</a></li>
             <li><a href="~/UpdateCustomer">Update Customer</a></li>
-            <li><a href="">Delete Customer</a></li>
+            <li><a href="~/DeleteCustomer">Delete Customer</a></li>
             <li><a href="">Process Sale</a></li>
 
         </ul>
@@ -34,11 +35,12 @@
         @RenderSection("AddItemContent",required:false)
         @RenderSection("AddCustomerContent",required:false)
         @RenderSection("UpdateCustomerContent",required:false)
+        @RenderSection("DeleteCustomerContent",required:false)
     </main>
 
     <footer>
 
-        <p>BAIS3150ABC Hardward Project created by Mike Wonhyuk Cho</p>
+        <p>BAIS3150 ABC Hardware Project created by Mike Wonhyuk Cho</p>
     </footer>
 </body>
 </html>

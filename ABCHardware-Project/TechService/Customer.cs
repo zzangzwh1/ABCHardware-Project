@@ -164,5 +164,102 @@ namespace ABCHardware_Project.TechService
         }
 
         #endregion
+
+        #region GetCustomer information for Update
+
+        public Models.Customer GetCustomerInfo(int customerID)
+        {
+            Models.Customer customer = new Models.Customer();  
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand("GetCustomer", conn))
+                {
+                    command.Parameters.AddWithValue("@CustomerID", customerID).SqlDbType = SqlDbType.Int;
+                    command.CommandType = CommandType.StoredProcedure;
+                    try
+                    {
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+
+                                while (reader.Read())
+                                {
+                                   customer = new Models.Customer
+                                    {
+
+                                        CustomerID = (int)reader["CustomerID"],
+                                        FirstName = (string)reader["FirstName"],
+                                        LastName = (string)reader["LastName"],
+                                        Address = (string)reader["Address"],
+                                        City = (string)reader["City"],
+                                        Province = (string)reader["Province"],
+                                        PostalCode = (string)reader["PostalCode"]
+
+                                    };
+
+
+                                  
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"There are No Student exists with that student ID try other Student ID");
+                            }
+
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error Occurred - {ex.Message}");
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+            return customer;
+        }
+        #endregion
+
+        #region
+
+        public bool DeleteCustomers(int customerID)
+        {
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand("RemoveCustomer", conn))
+                {
+                    try
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@CustomerID",customerID).SqlDbType = SqlDbType.Int;
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error Occurred {ex.Message}");
+                        return false;
+
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+
+
+
+                }
+            }
+            return true;
+
+        }
+        #endregion
     }
 }

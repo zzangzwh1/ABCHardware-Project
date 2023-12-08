@@ -19,35 +19,50 @@ namespace ABCHardware_Project.Pages
         public string Message { get; set; } = string.Empty;
 
         [BindProperty]
-        
         public int _CustomerID { set; get; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Please insert your First name")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only Alphabet is Valid ex) mike/Mike")]
+
         public string _FirstName { get; set; } = string.Empty;
+
         [BindProperty]
-        [Required(ErrorMessage = "Please insert your Last name")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only Alphabet is Valid ex) cho/Cho")]
+
         public string _LastName { get; set; } = string.Empty;
+
         [BindProperty]
-        [Required(ErrorMessage = "Please insert your Address")]
         public string _Address { get; set; } = string.Empty;
+
+
+        public Models.Customer customerInformation = null!;
+
         [BindProperty]
-        [Required(ErrorMessage = "Please insert your City")]
-        public string _City { get; set; } = string.Empty;
+        public int aCustomerID { get; set; }
         [BindProperty]
-        [Required(ErrorMessage = "Please insert your Province")]
-        public string _Province { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Please Update the First name if required")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only Alphabet is Valid ex) mike/Mike")]
+        public string aFirstName { get; set; } = string.Empty;
         [BindProperty]
-        [Required(ErrorMessage = "Please insert your Postal Code")]
+        [Required(ErrorMessage = "Please Update the Last name if required")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only Alphabet is Valid ex) cho/Cho")]
+        public string aLastName { get; set; } = string.Empty;
+        [BindProperty]
+        [Required(ErrorMessage = "Please Update Address if required")]
+        public string aAddress { get; set; } = string.Empty;
+        [BindProperty]
+        [Required(ErrorMessage = "Please Update City if required")]
+        public string aCity { get; set; } = string.Empty;
+        [BindProperty]
+        [Required(ErrorMessage = "Please Update Province if required")]
+        public string aProvince { get; set; } = string.Empty;
+        [BindProperty]
+        [Required(ErrorMessage = "Please Update the Postal Code if required")]
         [RegularExpression(@"[A-Z][0-9][A-Z] [0-9][A-Z][0-9]", ErrorMessage = "Invalid PostalCode format ex)T6G 0Z4")]
-        public string _PostalCode { get; set; } = string.Empty;
+        public string aPostalCode { get; set; } = string.Empty;
 
 
         public void OnGet()
         {
-            Message = "Please insert FirstName or LastName  before find customer";
+            Message = "Please insert LastName  before find customer";
         }
         public void OnPostFindCustomer()
         {
@@ -61,30 +76,48 @@ namespace ABCHardware_Project.Pages
                 customers = null!;
             }
         }
-       public void OnPostUpdate()
+        public void OnPostEdit()
         {
-            Models.Customer customer = new()
-            {
-                CustomerID = _CustomerID,
-                FirstName = _FirstName,
-                LastName = _LastName,
-                City = _City,
-                Province = _Province,
-                PostalCode = _PostalCode,
-                Address = _Address                     
-            
-            };
+            int customerId = _CustomerID;
             ABCPOS abcHardwareCustomer = new ABCPOS();
-            bool isUpdateCustomer = abcHardwareCustomer.UpdateCustomer(customer);
-
-            if (ModelState.IsValid || isUpdateCustomer)
+            customerInformation = abcHardwareCustomer.GetCustomerInfo(customerId);
+            if (customerInformation != null)
             {
-                Message = "Successfully Updated";
+                customers = null!;
+            }
+
+
+        }
+        public void OnPostUpdate()
+        {
+            Message = "Please Modify information! ";
+            Models.Customer updateCustomer = new()
+            {
+                CustomerID = aCustomerID,
+                FirstName = aFirstName,
+                LastName = aLastName,
+                Address = aAddress,
+                City = aCity,
+                Province = aProvince,
+                PostalCode = aPostalCode
+
+            };
+
+            ABCPOS abcHardwareCustomer = new ABCPOS();
+
+            bool isUpdateCustomer = abcHardwareCustomer.UpdateCustomer(updateCustomer);
+
+            if (isUpdateCustomer)
+            {
+                Message = "Customer is Successfully Modified!";
+                customerInformation = null;
             }
             else
             {
-                Message = "Failed! Try Again!";
+                Message = "Failed - Modify customer information please Try again!";
             }
         }
-    }
+
+
+}
 }
