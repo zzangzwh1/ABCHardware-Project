@@ -11,9 +11,12 @@ namespace ABCHardware_Project.Pages
 
         [BindProperty]
         [Required(ErrorMessage = "Please insert your First name")]
+
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only Alphabet is Valid ex) mike/Mike")]
         public string FirstName { get; set; } = string.Empty;
         [BindProperty]
         [Required(ErrorMessage = "Please insert your Last name")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only Alphabet is Valid ex) Cho/cho")]
         public string LastName { get; set; } = string.Empty;
         [BindProperty]
         [Required(ErrorMessage = "Please insert your Address")]

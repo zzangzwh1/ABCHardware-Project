@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Net;
 using ABCHardware_Project.Models;
 using Microsoft.Data.SqlClient;
 namespace ABCHardware_Project.TechService
@@ -60,10 +61,10 @@ namespace ABCHardware_Project.TechService
         #endregion
 
         #region Find Customer
-        public List<Customer> FindStudentWtihName(string firstOrLastName)
+        public List<Models.Customer> FindCustomerWtihName(string firstOrLastName)
         {
 
-            List<Customer> studentInfo = new List<Customer>();
+            List<Models.Customer> customerInfo = new List<Models.Customer>();
 
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
@@ -71,6 +72,7 @@ namespace ABCHardware_Project.TechService
                 conn.Open();
                 using (SqlCommand command = new SqlCommand("FindCustomer", conn))
                 {
+                    command.Parameters.AddWithValue("@FirstOrLastName", firstOrLastName).SqlDbType = SqlDbType.NVarChar;
                     command.CommandType = CommandType.StoredProcedure;
                     try
                     {
@@ -82,13 +84,21 @@ namespace ABCHardware_Project.TechService
 
                                 while (reader.Read())
                                 {
-                                    //string? programCodes = "";
-                                    for (int i = 0; i < reader.FieldCount; i++)
+                                    Models.Customer customer = new Models.Customer
                                     {
-                                        studentInfo.Add((Customer)reader[i]);
 
-                                    }
+                                        CustomerID = (int)reader["CustomerID"],
+                                        FirstName = (string)reader["FirstName"],
+                                        LastName = (string)reader["LastName"],
+                                        Address = (string)reader["Address"],
+                                        City = (string)reader["City"],
+                                        Province = (string)reader["Province"],
+                                        PostalCode = (string)reader["PostalCode"]
 
+                                    };
+
+
+                                    customerInfo.Add(customer);
                                 }
                             }
                             else
@@ -109,7 +119,48 @@ namespace ABCHardware_Project.TechService
                     }
                 }
             }
-            return studentInfo;
+            return customerInfo;
+        }
+
+        #endregion
+
+        #region Update Customer
+
+        public bool UpdateCustomers(Models.Customer customer)
+        {
+
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand("UpdateCustomer", conn))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    try
+                    {
+                        command.Parameters.AddWithValue("@CustomerID", customer.CustomerID).SqlDbType = SqlDbType.Int;
+                        command.Parameters.AddWithValue("@FirstName", customer.FirstName).SqlDbType = SqlDbType.NVarChar;
+                        command.Parameters.AddWithValue("@LastName", customer.LastName).SqlDbType = SqlDbType.NVarChar;
+                        command.Parameters.AddWithValue("@Address", customer.Address).SqlDbType = SqlDbType.NVarChar;
+                        command.Parameters.AddWithValue("@City", customer.City).SqlDbType = SqlDbType.NVarChar;
+                        command.Parameters.AddWithValue("@Province", customer.Province).SqlDbType = SqlDbType.NVarChar;
+                        command.Parameters.AddWithValue("@PostalCode", customer.PostalCode).SqlDbType = SqlDbType.Char;
+                        command.ExecuteNonQuery();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error Occurred {ex.Message}");
+                        return false;
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+
+            }
+            return true;
         }
 
         #endregion

@@ -19,72 +19,72 @@
                 <div>
                     <br />
                     <p class="modelMessage">Please insert First Name or Last Name for finding user information</p>
-                    <input asp-for="FindLastName" class="inputText" class="inputText" value="@Model.FindLastName" />
+                    <input asp-for="FindLastName" class="inputText" class="inputText" />
                 </div>
+
                 <div>
                     <br />
-                    <input type="submit" name="Submit" value="Find Customer" asp-page-asp-page-handler="FindCustomer" class="buttons">
+                    <input type="submit" name="Submit" asp-page-handler="FindCustomer" value="Find Customer" class="buttons">
                 </div>
+
             </form>
+
+
         </div>
-        @* <form name="SampleForm" method="post">
-    <div>
-    <br />
-    <input asp-for="FirstName" class="inputText" placeholder="Insert First Name" class="inputText" value="@Model.FirstName" />
-    </div>
-    <div>
-    <br />
-    <input asp-for="LastName" class="inputText" placeholder="Insert Last Name" class="inputText" value="@Model.LastName" />
+        <br />
+        <br />
+
+        <section class="messages">
+
+            <h3 class="modelMessage">@Model.Message</h3>
+
+        </section>
 
 
-    </div>
-    <div>
-    <br />
-    <input asp-for="Address" class="inputText" placeholder="Insert Address" class="inputText" value="@Model.Address" />
+        @if (Model.customers != null)
+        {
+            <form name="UpdateSample" method="post">
+                <table border="1">
+                    <tr>
+                        <td>Customer ID </td>
+                        <td>FirstName </td>
+                        <td>Last Name</td>
+                        <td>Address</td>
+                        <td>City</td>
+                        <td>Province</td>
+                        <td>PostalCode</td>
 
+                    </tr>
 
-    </div>
-    <div>
-    <br />
-    <input asp-for="City" class="inputText" placeholder="Insert City" class="inputText" value="@Model.City" />
+                    @foreach (var val in Model.customers)
+                    {
 
+                        <tr>
+                            <td><input asp-for="_CustomerID" value="@val.CustomerID" readonly /></td>
+                            <td><input asp-for="_FirstName" value="@val.FirstName" /></td>
+                            <td><input asp-for="_LastName" value="@val.LastName" /></td>
+                            <td><input asp-for="_Address" value="@val.Address" /></td>
+                            <td><input asp-for="_City" value="@val.City" /></td>
 
-    </div>
-    <div>
-    <br />
-    <input asp-for="Province" class="inputText" placeholder="Insert Province" class="inputText" value="@Model.Province" />
+                            <td><input asp-for="_Province" value="@val.Province" /></td>
+                            <td><input asp-for="_PostalCode" value="@val.PostalCode" /></td>
+                            <td><input type="submit" name="Update" value="Modify" class="buttons" asp-page-handler="Update"></td>
+                        </tr>
+                    }
+                </table>
 
+                <section class="messages">
+                    <br />
+                    <span asp-validation-for="_FirstName" class="modelMessage"></span>
+                    <span asp-validation-for="_LastName" class="modelMessage"></span>
+                    <span asp-validation-for="_Address" class="modelMessage"></span>
+                    <span asp-validation-for="_City" class="modelMessage"></span>
+                    <span asp-validation-for="_Province" class="modelMessage"></span>
+                    <span asp-validation-for="_PostalCode" class="modelMessage"></span>
+                </section>
+            </form>
+        }
 
-    </div>
-    <div>
-    <br />
-    <input asp-for="PostalCode" class="inputText" placeholder="Insert PostalCode" class="inputText" value="@Model.PostalCode" />
-
-
-    </div>
-    <div>
-    <br />
-    <input type="submit" name="Submit" value="Submit" class="buttons">
-    </div>
-    <section class="messages">
-    <br />
-    <span asp-validation-for="FirstName" class="modelMessage"></span>
-    <span asp-validation-for="LastName" class="modelMessage"></span>
-    <span asp-validation-for="Address" class="modelMessage"></span>
-    <span asp-validation-for="City" class="modelMessage"></span>
-    <span asp-validation-for="Province" class="modelMessage"></span>
-    <span asp-validation-for="PostalCode" class="modelMessage"></span>
-    </section>
-
-    </form>
-
-    </section>
-
-    <section class="messages">
-
-
-    <h3 class="modelMessage">@Model.Message</h3>
-    *@
     </section>
 
 }
