@@ -1,0 +1,97 @@
+﻿@page
+@model ABCHardware_Project.Pages.UpdateItemModel
+@{
+    ViewData["Title"] = "Update Item";
+}
+@section UpdateItemscriptContent
+    {
+    <script src="~/libraries/jquery/jquery.js"> </script>
+    <script src="~/libraries/jquery-validate/jquery.validate.js"></script>
+    <script src="~/libraries/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
+
+@section UpdateItemContent{
+
+    <section class="divHeader">
+        <h1> Update Item </h1>
+        <div>
+            <form name="SampleForm" method="post">
+                <div>
+                    <br />
+                    <p class="modelMessage">Please insert ItemCode for finding Item information</p>
+                    <input asp-for="FindItemCode" class="inputText" class="inputText" />
+                </div>
+
+                <div>
+                    <br />
+                    <input type="submit" name="Submit" value="Find Item" asp-page-handler="FindItem" class="buttons">
+                </div>
+
+                <section class="messages">
+                    <br />
+
+                    <span asp-validation-for="FindItemCode" class="modelMessage"></span>
+                </section>
+
+            </form>
+
+
+        </div>
+    </section>
+    <br />
+    <br />
+    <div class="messages">
+        @if (Model.items != null)
+        {
+
+            <form name="SelectUpdateSample" method="post">
+                <table border="1">
+                    <tr>
+                        <td>Item Code</td>
+                        <td>Description</td>
+                        <td>Unit Price</td>
+                        <td>Quantity</td>
+                        <td>Click for Modify Info</td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td><input asp-for="_ItemCode" value="@Model.items.ItemCode" readonly /></td>
+                        <td><input asp-for="_Description" value="@Model.items.Description" /></td>
+                        <td><input asp-for="_UnitPrice" value="@Model.items.UnitPrice" /></td>
+                        <td><input asp-for="_Quantity" value="@Model.items.Quantity" /></td>
+                        <td>
+                            <input type="submit" name="Update" value="Modify" class="buttons" asp-page-handler="Modify" />
+
+                        </td>
+                    </tr>
+
+
+                </table>
+
+                <section class="messages">
+                    <br />
+                    <span asp-validation-for="_ItemCode" class="modelMessage"></span>
+                    <span asp-validation-for="_Description" class="modelMessage"></span>
+                    <span asp-validation-for="_UnitPrice" class="modelMessage"></span>
+                    <span asp-validation-for="_Quantity" class="modelMessage"></span>
+
+                </section>
+
+            </form>
+
+        }
+
+
+    </div>
+
+    <section class="messages">
+
+        <h3 class="modelMessage">@Model.Message</h3>
+
+    </section>
+
+    }
+
+

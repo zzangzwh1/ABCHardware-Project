@@ -43,5 +43,26 @@ namespace ABCHardware_Project.Models
 
             return isSuccess;
         }
+        public bool AddItem(Item item)
+        {
+            TechService.Item itemManager = new TechService.Item();
+            bool isSuccess = itemManager.AddItem(item);
+            return isSuccess;
+        }
+        public Models.Item FindItemInformation(string itemCode)
+        {
+            TechService.Item itemManager = new TechService.Item();
+            Models.Item customerInformation = itemManager.GetItemInformation(itemCode);
+            return customerInformation;
+        }
+        public bool UpateItem(Item item)
+        {
+            TechService.Item itemManager = new TechService.Item();
+            bool isSuccess = itemManager.UpdateItems(item);
+
+
+            return isSuccess;
+        }
     }
 }
+

@@ -9,6 +9,8 @@
     @RenderSection("AddCustomerscriptContent",required:false)
     @RenderSection("UpdateCustomerscriptContent",required:false)
     @RenderSection("DeleteCustomerscriptContent",required:false)
+    @RenderSection("AddItemscriptContent",required:false)
+    @RenderSection("UpdateItemscriptContent",required:false)
 </head>
 <body>
     <header>
@@ -20,7 +22,7 @@
         <ul>
             <li><a href="~/Index">Home</a></li>
             <li><a href="~/Additem">Add Item</a></li>
-            <li><a href="">Update Item</a></li>
+            <li><a href="~/UpdateItem">Update Item</a></li>
             <li><a href="">Delete Item</a></li>
             <li><a href="~/AddCustomer">Add Customer</a></li>
             <li><a href="~/UpdateCustomer">Update Customer</a></li>
@@ -36,6 +38,8 @@
         @RenderSection("AddCustomerContent",required:false)
         @RenderSection("UpdateCustomerContent",required:false)
         @RenderSection("DeleteCustomerContent",required:false)
+        @RenderSection("UpdateItemContent",required:false)
+
     </main>
 
     <footer>

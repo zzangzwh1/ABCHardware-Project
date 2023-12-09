@@ -3,14 +3,67 @@
 @{
     ViewData["Title"] = "Add Item";
 }
-@section AddItemContent
-{
-    <div class="divHeader">
-        <h1>Add Item!</h1>
+@section AddItemscriptContent
+    {
+    <script src="~/libraries/jquery/jquery.js"> </script>
+    <script src="~/libraries/jquery-validate/jquery.validate.js"></script>
+    <script src="~/libraries/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
 
-    </div>
+@section AddItemContent{
+
+    <section class="divHeader">
+        <h1> Add Customer </h1>
+        <form name="SampleForm" method="post">
+            <div>
+                <br />
+                <label for="_ItemCode"> Item  Code  : </label> <br />
+                <input asp-for="_ItemCode" id="_ItemCode" class="inputText" placeholder="Insert Item Code" value="@Model._ItemCode" />
+            </div>
+            <div>
+                <br />
+                <label for="_Description"> Description: </label> <br />
+                <input asp-for="_Description" id="_Description" class="inputText" placeholder="Insert Description" value ="@Model._Description" />
 
 
+            </div>
+            <div>
+                <br />
+                <label for="_UnitPrice"> Item  Price  : </label> <br />
+                <input asp-for="_UnitPrice" id="_UnitPrice" class="inputText" placeholder="Insert UnitPrice" value="@Model._UnitPrice" />
 
+
+            </div>
+            <div>
+                <br />
+                <label for="_Quantity"> Quantity   : </label> <br />
+                <input asp-for="_Quantity" id="_Quantity" class="inputText" placeholder="Insert Quantity" value="@Model._Quantity"   />
+
+
+            </div>        
+            
+            <div>
+                <br />
+                <input type="submit" name="Submit" value="Submit" class="buttons">
+            </div>
+            <section class="messages">
+                <br />
+                <span asp-validation-for="_ItemCode" class="modelMessage"></span>
+                <span asp-validation-for="_Description" class="modelMessage"></span>
+                <span asp-validation-for="_UnitPrice" class="modelMessage"></span>
+                <span asp-validation-for="_Quantity" class="modelMessage"></span>
+            
+               
+            </section>
+
+        </form>
+
+    </section>
+
+    <section class="messages">
+
+
+        <h3 class="modelMessage">@Model.Message</h3>
+    </section>
 
 }

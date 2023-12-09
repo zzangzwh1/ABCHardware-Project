@@ -2,6 +2,7 @@
 using System.Net;
 using ABCHardware_Project.Models;
 using Microsoft.Data.SqlClient;
+
 namespace ABCHardware_Project.TechService
 {
     public class Customer
@@ -45,7 +46,7 @@ namespace ABCHardware_Project.TechService
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Error-Occurreed - {ex.Message}");
+                        Console.WriteLine($"Error-Occurred - {ex.Message}");
                         return false;
                     }
                     finally
