@@ -75,6 +75,10 @@ namespace ABCHardware_Project.Pages
                 Message = "Customer is not Exists!";
                 customers = null!;
             }
+            else
+            {
+                Message = "Customer Select for Updating Customer Information";
+            }
         }
         public void OnPostEdit()
         {
