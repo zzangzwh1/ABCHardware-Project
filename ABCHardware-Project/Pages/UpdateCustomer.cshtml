@@ -27,6 +27,12 @@
                     <input type="submit" name="Submit" value="Find Customer" asp-page-handler="FindCustomer" class="buttons">
                 </div>
 
+                <section class="messages">
+                    <br />
+                    <span asp-validation-for="FindLastName" class="modelMessage"></span>
+
+                </section>
+
             </form>
 
 

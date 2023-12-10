@@ -1,0 +1,106 @@
+﻿@page
+@model ABCHardware_Project.Pages.DeleteITemModel
+@{
+    ViewData["Title"] = "Delete Item";
+}
+@section DeleteItemscriptContent
+    {
+    <script src="~/libraries/jquery/jquery.js"> </script>
+    <script src="~/libraries/jquery-validate/jquery.validate.js"></script>
+    <script src="~/libraries/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+    <script>
+        function confirmDelete() {
+            // Show a Yes/No confirmation dialog
+            let userResponse = confirm("Are you sure you want to delete this information?\nClick 'OK' to confirm or 'Cancel' to cancel.");
+
+            // Return true if the user clicked 'OK', otherwise false
+            return userResponse;
+        }
+    </script>
+}
+@section DeleteItemContent
+    {
+    <section class="divHeader">
+        <h1> Update Item </h1>
+        <div>
+            <form name="SampleForm" method="post">
+                <div>
+                    <br />
+                    <p class="modelMessage">Please insert ItemCode for finding Item information</p>
+                    <input asp-for="FindItemCode" class="inputText" class="inputText" />
+                </div>
+
+                <div>
+                    <br />
+                    <input type="submit" name="Submit" value="Find Item" asp-page-handler="FindItem" class="buttons">
+                </div>
+
+                <section class="messages">
+                    <br />
+
+                    <span asp-validation-for="FindItemCode" class="modelMessage"></span>
+                </section>
+
+            </form>
+
+
+        </div>
+    </section>
+    <br />
+    <br />
+    <div class="messages">
+        @if (Model.items != null)
+        {
+
+            <form name="SelectUpdateSample" method="post">
+                <table border="1">
+                    <tr>
+                        <td>Item Code</td>
+                        <td>Description</td>
+                        <td>Unit Price</td>
+                        <td>Quantity</td>
+                        <td>Click for Delete Info</td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td><input asp-for="_ItemCode" value="@Model.items.ItemCode" readonly /></td>
+                        <td><input asp-for="_Description" value="@Model.items.Description" readonly /></td>
+                        <td><input asp-for="_UnitPrice" value="@Model.items.UnitPrice" readonly /></td>
+                        <td><input asp-for="_Quantity" value="@Model.items.Quantity" readonly /></td>
+                        <td>
+                            <input type="submit" name="Update" value="Delete" class="buttons" asp-page-handler="Delete" />
+
+                        </td>
+                    </tr>
+
+
+                </table>
+
+                <section class="messages">
+                    <br />
+                    <span asp-validation-for="_ItemCode" class="modelMessage"></span>
+                    <span asp-validation-for="_Description" class="modelMessage"></span>
+                    <span asp-validation-for="_UnitPrice" class="modelMessage"></span>
+                    <span asp-validation-for="_Quantity" class="modelMessage"></span>
+
+                </section>
+
+            </form>
+
+        }
+
+
+    </div>
+
+    <section class="messages">
+
+        <h3 class="modelMessage">@Model.Message</h3>
+
+    </section>
+
+
+}
+

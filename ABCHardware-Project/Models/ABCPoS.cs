@@ -63,6 +63,15 @@ namespace ABCHardware_Project.Models
 
             return isSuccess;
         }
+        public bool DeleteItem(string itemCode)
+        {
+            TechService.Item itemManager = new TechService.Item();
+            bool isSuccess = itemManager.DeleteItem(itemCode);
+
+
+            return isSuccess;
+        }
+
     }
 }
 

@@ -136,7 +136,41 @@ namespace ABCHardware_Project.TechService
                         command.Parameters.AddWithValue("@Description", items.Description).SqlDbType = SqlDbType.NVarChar;
                         command.Parameters.AddWithValue("@UnitPrice", items.UnitPrice).SqlDbType = SqlDbType.Decimal;
                         command.Parameters.AddWithValue("@Quantity", items.Quantity).SqlDbType = SqlDbType.Int;
-                      
+
+                        command.ExecuteNonQuery();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error Occurred {ex.Message}");
+                        return false;
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+
+            }
+            return true;
+        }
+        #endregion
+
+
+        #region
+        public bool DeleteItem(string itemCode)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand("DeleteItem", conn))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    try
+                    {
+                        command.Parameters.AddWithValue("@ItemCode", itemCode).SqlDbType = SqlDbType.NVarChar;
+
+
                         command.ExecuteNonQuery();
 
                     }
