@@ -262,5 +262,69 @@ namespace ABCHardware_Project.TechService
 
         }
         #endregion
+
+  /*      #region
+
+
+        public List<Models.Customer> GetCustomerInformation()
+        {
+
+            List<Models.Customer> customerInfo = new List<Models.Customer>();
+
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand("GetCustomerInfo", conn))
+                {
+                   
+                    command.CommandType = CommandType.StoredProcedure;
+                    try
+                    {
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+
+                                while (reader.Read())
+                                {
+                                    Models.Customer customer = new Models.Customer
+                                    {
+
+                                        CustomerID = (int)reader["CustomerID"],
+                                        FirstName = (string)reader["FirstName"],
+                                        LastName = (string)reader["LastName"],
+                                        Address = (string)reader["Address"]
+                                       
+
+                                    };
+
+
+                                    customerInfo.Add(customer);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"There are No Student exists with that student ID try other Student ID");
+                            }
+
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error Occurred - {ex.Message}");
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+            return customerInfo;
+        }
+
+        #endregion*/
     }
 }

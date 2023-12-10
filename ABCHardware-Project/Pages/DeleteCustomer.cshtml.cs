@@ -9,7 +9,8 @@ namespace ABCHardware_Project.Pages
     public class DeleteCustomerModel : PageModel
     {
         [BindProperty]
-        [Required(ErrorMessage = "Please insert FirstName or LastName  Before Update User Information!")]
+        [Required(ErrorMessage = "Please insert Last name")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only Alphabet is Valid ex) Cho/cho")]
         public string FindLastName { get; set; } = string.Empty;
 
         public List<Models.Customer> customers = null!;
