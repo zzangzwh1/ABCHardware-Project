@@ -263,7 +263,7 @@ namespace ABCHardware_Project.TechService
         }
         #endregion
 
-  /*      #region
+      #region
 
 
         public List<Models.Customer> GetCustomerInformation()

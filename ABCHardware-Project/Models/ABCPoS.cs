@@ -71,6 +71,14 @@ namespace ABCHardware_Project.Models
 
             return isSuccess;
         }
+        public List<Models.Item> GetEveryItems()
+        {
+            TechService.Item itemManager = new TechService.Item();
+            List<Models.Item> items = itemManager.GetEveryItem();
+
+
+            return items;
+        }
 
     }
 }

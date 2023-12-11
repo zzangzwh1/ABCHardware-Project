@@ -1,22 +1,25 @@
 ﻿header {
-    background-color: dimgrey;
+    background-color: white;
     text-align: center;
     width: 100%;
-    height: 7%;
-    position: fixed;
+    height: 100px;
+    top:0%;
+   margin:0;
+/*    position: fixed;
     top: 0%;
     left: 0%;
-    bottom: 10%;
+    bottom: 10%;*/
 }
 
 nav {
     background-color: dimgrey;
     text-align: center;
     width: 100%;
-    height: 5%;
-    position: fixed;
+    height: 30px;
+    /*    position: fixed;
     top: 7%;
     left: 0%;
+    */
 }
 
     nav * {
@@ -34,16 +37,17 @@ nav {
         }
 
             nav li a:hover {
-                color: white;
+                color: red;
             }
 main {
-    background-color: lightblue;
+    background-color: white;
     left: 0%;
     width: 100%;
-    height: 90%;
-    position: fixed;
-    top: 12%;
-    bottom: 95%;
+    height: 100%;
+/*    position: fixed;
+   top: 22%;
+
+    bottom: 95%;*/
 }
 .divHeader {
     display: grid;
@@ -51,7 +55,7 @@ main {
     align-items: center;
 }
 .buttons {
-    width: 400px;
+    width: 200px;
     height: 30px; /* Specify an appropriate height */
     background-color: black;
     color: white;
@@ -83,4 +87,58 @@ footer {
     left: 0%;
     top: 95%;
     bottom: 100%;
+}
+
+
+
+/* Styles for the form container */
+.form-container {
+   
+    max-width: 400px;
+    margin: auto;
+}
+
+/* Styles for form elements */
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+    .form div {
+        margin-bottom: 10px;
+    }
+
+.inputTexts {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.buttonss {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+    .buttonss:hover {
+        background-color: #45a049;
+    }
+.button-Gap{
+    gap:10px;
+}
+/* Adjust styles for readonly inputs */
+.inputTexts[readonly] {
+    background-color: #eee;
+    cursor: not-allowed;
 }
