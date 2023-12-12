@@ -79,114 +79,13 @@
 
 
             }
-        }
-  
-
-
-        }
-
-
-    }
-</div>
-
-@*   <section class="divHeader">
-        <h1> Process Sale</h1>
-        <div>
-            @if (Model.everyItems != null)
-            {
-
-
-                <form name="SampleForm" method="post">
-                    <div>
-                        <br />
-                        <p class="modelMessage">Please insert Last Name before process Sales</p>
-                        <input asp-for="FindLastName" class="inputText" class="inputText" />
-                    </div>
-
-                    <div>
-                        <br />
-                        <input type="submit" name="Submit" value="Find Customer" asp-page-handler="FindCustomer" class="buttons">
-                    </div>
-
-                </form>
-            }
-
-
-        </div>
-    </section>
-    <br />
-    <br />*@
 
 }
 
-@*@section ProcessSalesContent{
 
-    <section class="divHeader">
-        <h1> Process Sale</h1>
-        <div>
-            <form name="SampleForm" method="post">
-                <div>
-                    <br />
-                    <p class="modelMessage">Please insert Last Name before process Sales</p>
-                    <input asp-for="FindLastName" class="inputText" class="inputText" />
-                </div>
-
-                <div>
-                    <br />
-                    <input type="submit" name="Submit" value="Find Customer" asp-page-handler="FindCustomer" class="buttons">
-                </div>
-                <section class="messages">
-                    <br />
-
-                    <span asp-validation-for="FindLastName" class="modelMessage"></span>
-                </section>
-
-            </form>
-
-
-        </div>
-    </section>
-    <br />
-    <br />
-    <section class="divHeader">
-        @if (Model.customers != null)
-        {
-            <form name="SampleForm" method="post">
-                <div>
-                    <br />
-                    <label for="_SalePerson"> SalePerson : </label> <br />
-                    <input asp-for="_SalePerson" id="_SalePerson" class="inputText" placeholder="Insert SalePerson Name" />
-                </div>
-                <div>
-                    <br />
-                    <lable for="_CustomerID">Select Exists Student ID :  </lable>
-                    <select asp-for="TestTest" itemid="_CustomerID" style="width:100%;height:30px;">
-
-                        <option value="" class="selectionProgramCode" name="">Select customer</option>
-
-                        <!-- Loop through Model.CustomerInfo to generate options -->
-                        @foreach (var customer in Model.customers)
-                        {
-
-                            <!-- Use a unique value for the option, and display the necessary information -->
-                            <option value="@customer.CustomerID" class="selectionProgramCode" name="selectedValue">
-                                @($"{customer.CustomerID} - {customer.FirstName} {customer.LastName} - {customer.Address}")
-                            </option>
 
                         }
-                    </select>
+
 
                 </div>
 
-
-
-                <div>
-                    <br />
-                    <input type="submit" name="Submit" value="GetItems" asp-page-handler="GetItems" class="buttons">
-                </div>
-
-            </form>
-
-        }
-    </section>
-    }*@
