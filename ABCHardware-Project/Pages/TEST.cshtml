@@ -1,0 +1,87 @@
+﻿@page
+@model ABCHardware_Project.Pages.TESTModel
+@{
+}
+
+@section ProcessSalesContent {
+    <div class="messages">
+       @* @Model.Message*@
+        <br />
+        <br />
+
+        <table id="itemTable" border="1">
+            <tr>
+                <th>Select Customer</th>
+                <th>Item Code</th>
+                <th>Description</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </tr>
+
+            @foreach (var val in Model.everyItems)
+            {
+                <tr>
+                    <td>
+                        <label for="SelectValue">Select Existing Student ID: </label>
+                        <select class="customerSelect" style="width: 20%; height: 30px;">
+                            <option value="" class="selectionProgramCode">Select Student ID</option>
+                            @foreach (var id in Model.CustomerInfo)
+                            {
+                                <option value="@id.CustomerID" class="selectionProgramCode">@id.CustomerID @id.FirstName @id.LastName</option>
+                            }
+                        </select>
+                        <span class="modelMessage"></span>
+                    </td>
+                    <td><input class="itemCode" value="@val.ItemCode" readonly /></td>
+                    <td><input class="description" value="@val.Description" readonly /></td>
+                    <td><input class="unitPrice" value="@val.UnitPrice" readonly /></td>
+                    <td><input class="quantity" value="0" max="@val.Quantity" /></td>
+                    <td>
+                        <button type="button" onclick="addToCart(this)" class="buttons">Add To Cart</button>
+                    
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <br />
+    </div>
+
+    <h2>Shopping Cart</h2>
+    <table id="cartTable" border="1">
+        <tr>
+            <th>Customer ID</th>
+            <th>Item Code</th>
+            <th>Description</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+        </tr>
+    </table>
+
+    <script>
+        function addToCart(button) {
+            var tableRow = button.closest("tr");
+            var customerID = tableRow.querySelector(".customerSelect").value;
+            var itemCode = tableRow.querySelector(".itemCode").value;
+            var description = tableRow.querySelector(".description").value;
+            var unitPrice = tableRow.querySelector(".unitPrice").value;
+            var quantity = tableRow.querySelector(".quantity").value;
+
+            var cartTable = document.getElementById("cartTable");
+            var newRow = cartTable.insertRow(-1);
+
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
+
+            cell1.innerHTML = customerID;
+            cell2.innerHTML = itemCode;
+            cell3.innerHTML = description;
+            cell4.innerHTML = unitPrice;
+            cell5.innerHTML = quantity;
+        }
+    </script>
+}
