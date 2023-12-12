@@ -56,56 +56,14 @@ namespace ABCHardware_Project.Pages
             ABCPOS abcManager = new ABCPOS();
             everyItems = abcManager.GetEveryItems();
             GetCustomerInfo();
-            /*
-                        HttpContext.Session.SetString("iCode", _ItemCode);
-                        HttpContext.Session.SetString("iDescription", _Description);
-
-                        HttpContext.Session.SetString("iUnit", _UnitPrice.ToString());
-
-                        HttpContext.Session.SetString("iQuantity", _Quantity.ToString());
-                        string iCode = (string)HttpContext.Session.GetString("iCode")!;
-                        string iDescription = (string)HttpContext.Session.GetString("iDescription")!;
-                        string iUnit = (string)HttpContext.Session.GetString("iUnit")!;
-                        string iQuantity = (string)HttpContext.Session.GetString("iQuantity")!;
-                        list.Add(iCode);
-                        list.Add(iDescription);
-                        list.Add(iUnit);
-                        list.Add(iQuantity);*/
 
         }
         public void OnPost()
         {
-            ABCPOS abcManager = new ABCPOS();
+                ABCPOS abcManager = new ABCPOS();
                 everyItems = abcManager.GetEveryItems();
                 GetCustomerInfo();
             
-
-               /* CustomerIDSelect = 0;
-                HttpContext.Session.SetString("iCode", _ItemCode);
-                HttpContext.Session.SetString("iDescription", _Description);
-
-                HttpContext.Session.SetString("iUnit", _UnitPrice.ToString());
-
-                HttpContext.Session.SetString("iQuantity", _Quantity.ToString());
-                string iCode = (string)HttpContext.Session.GetString("iCode")!;
-                string iDescription = (string)HttpContext.Session.GetString("iDescription")!;
-                string iUnit = (string)HttpContext.Session.GetString("iUnit")!;
-                string iQuantity = (string)HttpContext.Session.GetString("iQuantity")!;
-                Models.Item tempItem = new()
-                {
-                    ItemCode = _ItemCode,
-                    Description = _Description,
-                    UnitPrice = _UnitPrice,
-                    Quantity = _Quantity
-                };
-
-                list = new List<string>();
-
-                list.Add(iCode);
-                list.Add(iDescription);
-                list.Add(iUnit);
-                list.Add(iQuantity);
-*/
 
             string s = "";
         }
