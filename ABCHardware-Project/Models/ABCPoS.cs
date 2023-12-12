@@ -79,6 +79,13 @@ namespace ABCHardware_Project.Models
 
             return items;
         }
+        public int ProcessSale(Sales saleItem)
+        {
+            TechService.Sales saleManager = new TechService.Sales();
+            int saleNum = saleManager.AddSale(saleItem);
+
+            return saleNum;
+        }
 
     }
 }

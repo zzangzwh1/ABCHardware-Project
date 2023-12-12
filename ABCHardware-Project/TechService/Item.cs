@@ -28,16 +28,16 @@ namespace ABCHardware_Project.TechService
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
-                using (SqlCommand command = new SqlCommand("CreateItem", conn))
+                using (SqlCommand command = new SqlCommand("AddSale", conn))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
                     try
                     {
-                        command.Parameters.AddWithValue("@ItemCode", items.ItemCode).SqlDbType = SqlDbType.NVarChar;
-                        command.Parameters.AddWithValue("@Description", items.Description).SqlDbType = SqlDbType.NVarChar;
-                        command.Parameters.AddWithValue("@UnitPrice", items.UnitPrice).SqlDbType = SqlDbType.Decimal;
-                        command.Parameters.AddWithValue("@Quantity", items.Quantity).SqlDbType = SqlDbType.Int;
+                        command.Parameters.AddWithValue("@SaleNumber", items.ItemCode).SqlDbType = SqlDbType.NVarChar;
+                        command.Parameters.AddWithValue("@CustomerID", items.Description).SqlDbType = SqlDbType.NVarChar;
+                        command.Parameters.AddWithValue("@SaleDate", items.UnitPrice).SqlDbType = SqlDbType.Decimal;
+                        command.Parameters.AddWithValue("@SalePerson", items.Quantity).SqlDbType = SqlDbType.Int;
 
                         command.ExecuteNonQuery();
 
