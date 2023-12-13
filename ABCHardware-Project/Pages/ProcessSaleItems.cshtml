@@ -82,13 +82,13 @@
             }
 
             // Update the content of separate div elements
-            totalUnitPriceDiv.innerHTML = 'Total Unit Price: $ ' + totalUnitPrice;
-            totalGSTDiv.innerHTML = 'Total GST(5%): $ ' + totalGST;
-            grandTotalDiv.innerHTML = 'Grand Total: $ ' + (totalUnitPrice + totalGST);
+            totalUnitPriceDiv.innerHTML = '<b>Total Unit Price:</b> $ ' + totalUnitPrice;
+            totalGSTDiv.innerHTML = '<b>Total GST(5%):</b> $ ' + totalGST;
+            grandTotalDiv.innerHTML = '<b>Grand Total:</b> $ ' + (totalUnitPrice + totalGST);
         }
-        function clearLocalStorage() {
-            localStorage.clear();
-        }
+      //  function clearLocalStorage() {
+       //     localStorage.clear();
+       // }
 
 
     </script>
@@ -189,7 +189,7 @@
                 <div id="totalGST"></div>
                 <div id="grandTotalDiv"></div>
                 <br></br>
-                <input type="submit" name="Sumit" value="Clear Items" class="buttons" onclick="clearLocalStorage();" asp-page-handler="FindItem" />
+               @* <input type="submit" name="Sumit" value="Clear Items" class="buttons" onclick="clearLocalStorage();" asp-page-handler="FindItem" />*@
             </form>
         }
     </div>
