@@ -9,6 +9,12 @@
     <script src="~/libraries/jquery/jquery.js"> </script>
     <script src="~/libraries/jquery-validate/jquery.validate.js"></script>
     <script src="~/libraries/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript">
+        window.addEventListener('beforeunload', function () {
+            // Clear the localStorage
+            localStorage.clear();
+        });
+    </script>
 }
 @section UpdateCustomerContent{
 
@@ -98,13 +104,13 @@
 
                     <tr>
                         <td><input asp-for="aCustomerID" value="@Model.customerInformation.CustomerID" readonly /></td>
-                        <td><input asp-for="aFirstName" value="@Model.customerInformation.FirstName"  /></td>
-                        <td><input asp-for="aLastName" value="@Model.customerInformation.LastName"  /></td>
-                        <td><input asp-for="aAddress" value="@Model.customerInformation.Address"  /></td>
-                        <td><input asp-for="aCity" value="@Model.customerInformation.City"  /></td>
-                        <td><input asp-for="aProvince" value="@Model.customerInformation.Province"  /></td>
-                        <td><input asp-for="aPostalCode" value="@Model.customerInformation.PostalCode"  /></td>
-                   
+                        <td><input asp-for="aFirstName" value="@Model.customerInformation.FirstName" /></td>
+                        <td><input asp-for="aLastName" value="@Model.customerInformation.LastName" /></td>
+                        <td><input asp-for="aAddress" value="@Model.customerInformation.Address" /></td>
+                        <td><input asp-for="aCity" value="@Model.customerInformation.City" /></td>
+                        <td><input asp-for="aProvince" value="@Model.customerInformation.Province" /></td>
+                        <td><input asp-for="aPostalCode" value="@Model.customerInformation.PostalCode" /></td>
+
                         <td>
                             <input type="submit" name="Update" value="Update" class="buttons" asp-page-handler="Update" />
 

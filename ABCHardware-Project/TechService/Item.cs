@@ -28,16 +28,16 @@ namespace ABCHardware_Project.TechService
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
-                using (SqlCommand command = new SqlCommand("AddSale", conn))
+                using (SqlCommand command = new SqlCommand("CreateItem", conn))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
                     try
                     {
-                        command.Parameters.AddWithValue("@SaleNumber", items.ItemCode).SqlDbType = SqlDbType.NVarChar;
-                        command.Parameters.AddWithValue("@CustomerID", items.Description).SqlDbType = SqlDbType.NVarChar;
-                        command.Parameters.AddWithValue("@SaleDate", items.UnitPrice).SqlDbType = SqlDbType.Decimal;
-                        command.Parameters.AddWithValue("@SalePerson", items.Quantity).SqlDbType = SqlDbType.Int;
+                        command.Parameters.AddWithValue("@ItemCode", items.ItemCode).SqlDbType = SqlDbType.NVarChar;
+                        command.Parameters.AddWithValue("@Description", items.Description).SqlDbType = SqlDbType.NVarChar;
+                        command.Parameters.AddWithValue("@UnitPrice", items.UnitPrice).SqlDbType = SqlDbType.Decimal;
+                        command.Parameters.AddWithValue("@Quantity", items.Quantity).SqlDbType = SqlDbType.Int;
 
                         command.ExecuteNonQuery();
 
@@ -196,7 +196,7 @@ namespace ABCHardware_Project.TechService
         #endregion
 
 
-        #region
+        #region Delete Item
         public bool DeleteItem(string itemCode)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
@@ -229,7 +229,7 @@ namespace ABCHardware_Project.TechService
         }
         #endregion
 
-        #region
+        #region Get Every Item
 
         public List<Models.Item> GetEveryItem()
         {
@@ -267,14 +267,14 @@ namespace ABCHardware_Project.TechService
 
                                     everyItem.Add(itemInfo);
                                 }
-                             
+
 
                             }
                             else
                             {
-                                everyItem = null!; 
+                                everyItem = null!;
                             }
-                         
+
 
 
                         }
@@ -292,6 +292,39 @@ namespace ABCHardware_Project.TechService
             return everyItem;
         }
 
+        #endregion
+
+        #region Update Quantity Item 
+        public bool UpdateQuantityItem(Models.Item items)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand("UpdateItemQuantity", conn))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    try
+                    {
+                        command.Parameters.AddWithValue("@ItemCode", items.ItemCode).SqlDbType = SqlDbType.NVarChar;
+                        command.Parameters.AddWithValue("@Quantity", items.Quantity).SqlDbType = SqlDbType.Int;
+
+                        command.ExecuteNonQuery();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error Occurred {ex.Message}");
+                        return false;
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+
+            }
+            return true;
+        }
         #endregion
     }
 }

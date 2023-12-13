@@ -50,11 +50,13 @@ namespace ABCHardware_Project.Pages
 
         public string myDecimal = "";
 
+
         [BindProperty]
         public List<string> list { set; get; } = null;
 
         public void OnGet()
         {
+
 
             ABCPOS abcManager = new ABCPOS();
             everyItems = abcManager.GetEveryItems();
@@ -66,17 +68,30 @@ namespace ABCHardware_Project.Pages
             ABCPOS abcManager = new ABCPOS();
             everyItems = abcManager.GetEveryItems();
             GetCustomerInfo();
-            list = SessionGenerate();
-            int saleNumber = RandomNumber();
-            Sales saleItem = new()
-            {
-                CustomerID = CustomerIDSelect,
-                SalePerson = "Jenny Brooks",
-                SaleNumber = saleNumber,
-                SaleDate = DateTime.Now
+            UpdateQuantity();
 
 
             string s = "";
+        }
+        public void UpdateQuantity()
+        {
+            Models.Item items = new()
+            {
+                ItemCode = _ItemCode,
+                Quantity = _Quantity
+
+            };
+
+            ABCPOS abcManager = new ABCPOS();
+            bool isUpdated = abcManager.UpdateItemQuantity(items);
+            if (isUpdated)
+            {
+                Message = "Success";
+            }
+            else
+            {
+                Message = "Fail!";
+            }
         }
 
         public void GetCustomerInfo()
@@ -85,36 +100,6 @@ namespace ABCHardware_Project.Pages
             CustomerInfo = customerManager.GetCustomerInformation();
 
         }
-        public List<string> SessionGenerate()
-        {
-            list = new List<string>();
-
-            HttpContext.Session.SetString("iCode", _ItemCode);
-            HttpContext.Session.SetString("iDescription", _Description);
-
-            HttpContext.Session.SetString("iUnit", _UnitPrice.ToString());
-
-            HttpContext.Session.SetString("iQuantity", _Quantity.ToString());
-            string iCode = (string)HttpContext.Session.GetString("iCode")!;
-            string iDescription = (string)HttpContext.Session.GetString("iDescription")!;
-            string iUnit = (string)HttpContext.Session.GetString("iUnit")!;
-            string iQuantity = (string)HttpContext.Session.GetString("iQuantity")!;
-            list.Add(iCode);
-            list.Add(iDescription);
-            list.Add(iUnit);
-            list.Add(iQuantity);
-            return list;
-
-        }
-        public int RandomNumber()
-        {
-            Random random = new Random();
-            int randomNineDigitNumber = random.Next(100_000_000, 1_000_000_000);
-            return randomNineDigitNumber;
-        }
-
-
-
 
 
     }

@@ -10,6 +10,10 @@
     <script src="~/libraries/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 
     <script>
+        window.addEventListener('beforeunload', function () {
+            // Clear the localStorage
+            localStorage.clear();
+        });
         function confirmDelete() {
             // Show a Yes/No confirmation dialog
             let userResponse = confirm("Are you sure you want to delete this information?\nClick 'OK' to confirm or 'Cancel' to cancel.");
@@ -17,6 +21,7 @@
             // Return true if the user clicked 'OK', otherwise false
             return userResponse;
         }
+     
     </script>
 }
 

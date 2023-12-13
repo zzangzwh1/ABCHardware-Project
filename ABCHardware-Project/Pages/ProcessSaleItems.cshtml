@@ -9,104 +9,180 @@
     <script src="~/libraries/jquery/jquery.js"> </script>
     <script src="~/libraries/jquery-validate/jquery.validate.js"></script>
     <script src="~/libraries/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            loadCartItems();
+        });
+
+        function addToCart(button) {
+            let tableRow = button.closest("tr");
+            let customerSelect = tableRow.querySelector(".customerSelect");
+            let customerID = customerSelect.value;
+            let itemCode = tableRow.querySelector(".itemCode").value;
+            let description = tableRow.querySelector(".description").value;
+            let unitPrice = tableRow.querySelector(".unitPrice").value;
+            let quantity = tableRow.querySelector(".quantity").value;
+
+            if (customerSelect.value === "") {
+                alert('Please Select Customer ID');
+                return false;
+
+            } else if (quantity === "" || quantity == 0) {
+                alert('Quantity must not be empty or 0. Please insert a valid quantity.');
+                return false;
+            }
+
+            var cartItem = {
+                customerID: customerID,
+                itemCode: itemCode,
+                description: description,
+                unitPrice: unitPrice,
+                quantity: quantity
+            };
+
+            var existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+            existingCartItems.push(cartItem);
+            localStorage.setItem("cartItems", JSON.stringify(existingCartItems));
+
+            loadCartItems(); // Refresh the cart table
+            return true;
+        }
+
+        function loadCartItems() {
+            var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+            var cartTable = document.getElementById("cartTable");
+            var totalUnitPriceDiv = document.getElementById("totalUnitPrice");
+            var totalGSTDiv = document.getElementById("totalGST");
+            var grandTotalDiv = document.getElementById("grandTotalDiv");
+
+            while (cartTable.rows.length > 1) {
+                cartTable.deleteRow(1);
+            }
+
+            let totalUnitPrice = 0;
+            let totalGST = 0;
+
+            for (var i = 0; i < cartItems.length; i++) {
+                var newRow = cartTable.insertRow(-1);
+
+                // Calculate total unit price for each item
+                var itemTotalUnitPrice = cartItems[i].unitPrice * cartItems[i].quantity;
+                totalUnitPrice += itemTotalUnitPrice;
+
+                // Calculate GST for each item (assuming GST is 10%)
+                var itemGST = 0.1 * itemTotalUnitPrice;
+                totalGST += itemGST;
+
+                newRow.insertCell(0).innerHTML = cartItems[i].customerID;
+                newRow.insertCell(1).innerHTML = cartItems[i].itemCode;
+                newRow.insertCell(2).innerHTML = cartItems[i].description;
+                newRow.insertCell(3).innerHTML = cartItems[i].unitPrice;
+                newRow.insertCell(4).innerHTML = cartItems[i].quantity;
+
+            }
+
+            // Update the content of separate div elements
+            totalUnitPriceDiv.innerHTML = 'Total Unit Price: $' + totalUnitPrice;
+            totalGSTDiv.innerHTML = 'Total GST: $' + totalGST;
+            grandTotalDiv.innerHTML = 'Grand Total: $' + (totalUnitPrice + totalGST);
+        }
+        function clearLocalStorage() {
+            localStorage.clear();
+        }
+
+
+    </script>
 
     }
 
 
 @section ProcessSalesContent{
 
-    <div class="messages">
 
-        @Model.Message
-        <br></br>
-        <br></br>
-
+    @if (Model.everyItems != null)
+    {
 
         @foreach (var val in Model.everyItems)
         {
-            <form name="SampleForm" method="post">
+            <div class="messages">
+                <form name="SampleForm" method="post">
 
 
-                <table border="1">
-                    <tr>
-                        <td>Select Customer</td>
-                        <td>Item Code</td>
 
-                        <td>Description</td>
-                        <td>Unit Price</td>
-                        <td>Quanitity</td>
-                        <td>To Cart</td>
+                    <table id="itemTable" border="1">
+                        <tr>
+                            <th>Select Customer</th>
+                            <th>Item Code</th>
+                            <th>Description</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Action</th>
+                        </tr>
 
-                    </tr>
+                        <tr>
+                            <td>
+                                <label for="SelectValue">Select Existing Student ID: </label>
+                                <select class="customerSelect" style="width: 20%; height: 30px;">
+                                    <option value="" class="selectionProgramCode">Select Student ID</option>
+                                    @foreach (var id in Model.CustomerInfo)
+                                    {
+                                        <option value="@id.CustomerID" class="selectionProgramCode">@id.CustomerID @id.FirstName @id.LastName</option>
+                                    }
+                                </select>
+                                <span class="modelMessage"></span>
+                            </td>
+                            <td><input name="_ItemCode" class="itemCode" value="@val.ItemCode" readonly /></td>
+                            <td><input class="description" value="@val.Description" readonly /></td>
+                            <td><input class="unitPrice" value="@val.UnitPrice" readonly /></td>
+                            <td><input name="_Quantity" class="quantity" value="0" max="@val.Quantity" /></td>
+                            <td>
+                                <input type="submit" value="Submit" onclick="return addToCart(this)" class="buttons" />
+                            </td>
 
-                    <tr>
-                        <td>
-                            <label for="SelectValue">Select Existing Student ID: </label>
-                            <select asp-for="CustomerIDSelect" style="width:20%; height:30px;">
-                                <option value="" class="selectionProgramCode">Select Student ID</option>
-                                @foreach (var id in Model.CustomerInfo)
-                                {
-                                    <option value="@id.CustomerID" class="selectionProgramCode">@id.CustomerID @id.FirstName @id.LastName </option>
-                                }
-                            </select>
-                            <span asp-validation-for="CustomerIDSelect" class="modelMessage"></span>
-                        </td>
-                        <td><input asp-for="_ItemCode" value="@val.ItemCode" /></td>
+                        </tr>
 
-                        <td><input asp-for="_Description" value="@val.Description" readonly /></td>
-                        <td><input asp-for="_UnitPrice" value="@val.UnitPrice" readonly /></td>
-                        <td><input asp-for="_Quantity" value="0" max="@val.Quantity" /></td>
-                        <span asp-validation-for="_Quantity" class="modelMessage"></span>
+                    </table>
 
-                        <td>
-                            <input type="submit" name="Update" value="Add To Cart" class="buttons" />
-
-                        </td>
-
-
-                    </tr>
+                    <br></br>
 
 
-                </table>
 
-                <br></br>
+                </form>
 
-            </form>
-
-
+            </div>
 
         }
+    }
 
-        @if (Model.list != null)
-        {
-            <h2>Purchased Item</h2>
-            <table border="1">
+    <div class="messages">
+        <h2>Purchased Item!</h2>
+        <form name="sample" method="post">
+            <table id="cartTable" border="1">
                 <tr>
-                    <td>Item Code</td>
-                    <td>Description</td>
-                    <td>Unit Price</td>
-                    <td>Quanitity</td>
-
-
+                    <th>Customer ID</th>
+                    <th>Item Code</th>
+                    <th>Description</th>
+                    <th>Unit Price</th>
+                    <th>Quantity</th>
                 </tr>
-                <tr>
-                    @for (int i = 0; i < Model.list.Count; i++)
-                    {
-                        <td>@Model.list[i]</td>
-                    }
-                </tr>
-
-
-
             </table>
-        }
 
+            <div id="totalUnitPrice"></div>
+            <div id="totalGST"></div>
+            <div id="grandTotalDiv"></div>
 
-
-
-
-
-
+            <input type="submit" name="Sumit" value="Clear Items" class="buttons" onclick="clearLocalStorage();" />
+        </form>
     </div>
+
+
+
+
+
+
+
+
+
+
 }
 
