@@ -15,11 +15,7 @@ namespace ABCHardware_Project.Pages
         [Required(ErrorMessage = "Please insert Sales FullName")]
         [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Only alphabet characters and spaces are valid, e.g., Mike Cho")]
         public string _SalePerson { get; set; } = string.Empty;
-
-
         public List<Models.Customer> CustomerInfo = null!;
-
-
         public string Message { get; set; } = string.Empty;
         [BindProperty]
         [Required(ErrorMessage = "Please insert Customer Last name")]
@@ -56,7 +52,6 @@ namespace ABCHardware_Project.Pages
 
         public void OnGet()
         {
-
 
             ABCPOS abcManager = new ABCPOS();
             everyItems = abcManager.GetEveryItems();
