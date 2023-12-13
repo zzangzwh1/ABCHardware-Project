@@ -43,19 +43,19 @@ namespace ABCHardware_Project.Models
 
             return isSuccess;
         }
-        public bool AddItem(Item item)
+        public bool AddItem(SaleItem item)
         {
             TechService.Item itemManager = new TechService.Item();
             bool isSuccess = itemManager.AddItem(item);
             return isSuccess;
         }
-        public Models.Item FindItemInformation(string itemCode)
+        public Models.SaleItem FindItemInformation(string itemCode)
         {
             TechService.Item itemManager = new TechService.Item();
-            Models.Item customerInformation = itemManager.GetItemInformation(itemCode);
+            Models.SaleItem customerInformation = itemManager.GetItemInformation(itemCode);
             return customerInformation;
         }
-        public bool UpdateItem(Item item)
+        public bool UpdateItem(SaleItem item)
         {
             TechService.Item itemManager = new TechService.Item();
             bool isSuccess = itemManager.UpdateItems(item);
@@ -71,22 +71,22 @@ namespace ABCHardware_Project.Models
 
             return isSuccess;
         }
-        public List<Models.Item> GetEveryItems()
+        public List<Models.SaleItem> GetEveryItems()
         {
             TechService.Item itemManager = new TechService.Item();
-            List<Models.Item> items = itemManager.GetEveryItem();
+            List<Models.SaleItem> items = itemManager.GetEveryItem();
 
 
             return items;
         }
-        public int ProcessSale(ABCSales saleItem)
+        public int ProcessSale(Sale saleItem)
         {
-            TechService.ABCSales saleManager = new TechService.ABCSales();
+            TechService.Sales saleManager = new TechService.Sales();
             int saleNum = saleManager.AddSale(saleItem);
 
             return saleNum;
         }
-        public bool UpdateItemQuantity(Models.Item item)
+        public bool UpdateItemQuantity(Models.SaleItem item)
         {
             TechService.Item itemManager = new TechService.Item();
             bool isSuccess = itemManager.UpdateQuantityItem(item);

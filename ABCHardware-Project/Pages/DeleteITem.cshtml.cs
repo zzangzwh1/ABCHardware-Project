@@ -11,7 +11,7 @@ namespace ABCHardware_Project.Pages
         [Required(ErrorMessage = "Please insert ItemCode")]
         [RegularExpression(@"^[A-Z]\d{5}$", ErrorMessage = "First letter must be a capital alphabet, followed by exactly 5 digits (e.g., A12345)")]
         public string FindItemCode { get; set; } = string.Empty;
-        public Models.Item items = null!;
+        public Models.SaleItem items = null!;
 
         [BindProperty]
         public string _ItemCode { get; set; } = string.Empty;

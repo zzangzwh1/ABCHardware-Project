@@ -3,10 +3,10 @@ using System.Data;
 
 namespace ABCHardware_Project.TechService
 {
-    public class ABCSales
+    public class Sales
     {
         private readonly string _connectionString;
-        public ABCSales()
+        public Sales()
         {
             // Constructor Logic
             ConfigurationBuilder databaseUserBuilder = new ConfigurationBuilder();
@@ -18,7 +18,7 @@ namespace ABCHardware_Project.TechService
         }
 
         #region AddSales
-        public int AddSale(Models.ABCSales sales)
+        public int AddSale(Models.Sale sales)
         {
 
 
@@ -36,7 +36,8 @@ namespace ABCHardware_Project.TechService
                         command.Parameters.AddWithValue("@CustomerID", sales.CustomerID).SqlDbType = SqlDbType.Int;
                         command.Parameters.AddWithValue("@SaleDate", sales.SaleDate).SqlDbType = SqlDbType.Date;
                         command.Parameters.AddWithValue("@SalePerson", sales.SalePerson).SqlDbType = SqlDbType.NVarChar;
-
+                        command.Parameters.AddWithValue("@ItemCode", sales.SaleItem.ItemCode).SqlDbType = SqlDbType.NVarChar;
+                        command.Parameters.AddWithValue("@Quantity", sales.SaleItem.Quantity).SqlDbType = SqlDbType.NVarChar;
                         command.ExecuteNonQuery();
 
 

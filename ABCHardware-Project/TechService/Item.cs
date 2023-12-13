@@ -22,7 +22,7 @@ namespace ABCHardware_Project.TechService
         #region Add Item
 
 
-        public bool AddItem(Models.Item items)
+        public bool AddItem(Models.SaleItem items)
         {
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
@@ -61,7 +61,7 @@ namespace ABCHardware_Project.TechService
         #endregion
 
         #region
-        public bool AddTempItem(Models.Item items)
+        public bool AddTempItem(Models.SaleItem items)
         {
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
@@ -101,10 +101,10 @@ namespace ABCHardware_Project.TechService
 
         #region GetItemInformation
 
-        public Models.Item GetItemInformation(string itemCode)
+        public Models.SaleItem GetItemInformation(string itemCode)
         {
 
-            Models.Item itemInfo = new Models.Item();
+            Models.SaleItem itemInfo = new Models.SaleItem();
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -123,7 +123,7 @@ namespace ABCHardware_Project.TechService
 
                                 while (reader.Read())
                                 {
-                                    itemInfo = new Models.Item
+                                    itemInfo = new Models.SaleItem
                                     {
 
                                         ItemCode = (string)reader["ItemCode"],
@@ -161,7 +161,7 @@ namespace ABCHardware_Project.TechService
         #endregion
 
         #region
-        public bool UpdateItems(Models.Item items)
+        public bool UpdateItems(Models.SaleItem items)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -231,10 +231,10 @@ namespace ABCHardware_Project.TechService
 
         #region Get Every Item
 
-        public List<Models.Item> GetEveryItem()
+        public List<Models.SaleItem> GetEveryItem()
         {
-            List<Models.Item> everyItem = new List<Models.Item>();
-            Models.Item itemInfo = new Models.Item();
+            List<Models.SaleItem> everyItem = new List<Models.SaleItem>();
+            Models.SaleItem itemInfo = new Models.SaleItem();
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -252,7 +252,7 @@ namespace ABCHardware_Project.TechService
 
                                 while (reader.Read())
                                 {
-                                    itemInfo = new Models.Item
+                                    itemInfo = new Models.SaleItem
                                     {
 
                                         ItemCode = (string)reader["ItemCode"],
@@ -295,7 +295,7 @@ namespace ABCHardware_Project.TechService
         #endregion
 
         #region Update Quantity Item 
-        public bool UpdateQuantityItem(Models.Item items)
+        public bool UpdateQuantityItem(Models.SaleItem items)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {

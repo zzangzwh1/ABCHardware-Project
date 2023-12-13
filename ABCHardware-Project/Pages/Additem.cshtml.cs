@@ -35,7 +35,7 @@ namespace ABCHardware_Project.Pages
         }
         public void OnPost()
         {
-            Item items = new()
+            SaleItem items = new()
             {
                 ItemCode = _ItemCode,
                 Description = _Description,

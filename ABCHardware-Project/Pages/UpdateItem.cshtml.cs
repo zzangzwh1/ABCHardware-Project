@@ -18,7 +18,7 @@ namespace ABCHardware_Project.Pages
         [RegularExpression(@"^[A-Z]\d{5}$", ErrorMessage = "First letter must be a capital alphabet, followed by exactly 5 digits (e.g., A12345)")]
         public string FindItemCode { get; set; } = string.Empty;
 
-        public Models.Item items = null!;
+        public Models.SaleItem items = null!;
 
         [BindProperty]
         public string _ItemCode { get; set; } = string.Empty;
@@ -62,7 +62,7 @@ namespace ABCHardware_Project.Pages
         public void OnPostModify()
         {
             Message = "Please Modify information! ";
-            Models.Item items = new()
+            Models.SaleItem items = new()
             {
                 ItemCode = _ItemCode,
                 Description = _Description,

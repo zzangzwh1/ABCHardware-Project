@@ -1,16 +1,11 @@
 using ABCHardware_Project.Models;
-using ABCHardware_Project.TechService;
-using Microsoft.AspNetCore.DataProtection.KeyManagement;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ABCHardware_Project.Pages
 {
-    public class ProcessSaleModel : PageModel
+    public class TESTTESTModel : PageModel
     {
         [BindProperty]
         [Required(ErrorMessage = "Please insert Sales FullName")]
@@ -46,8 +41,8 @@ namespace ABCHardware_Project.Pages
         public int _Quantity { set; get; }
 
         public string myDecimal = "";
-       /* public int SaleNumber { get; set; }
-*/
+        public int SaleNumber { get; set; }
+
         public int ResultSaleNumber { get; set; }
         [BindProperty]
         public int SelectValue { set; get; }
@@ -63,76 +58,33 @@ namespace ABCHardware_Project.Pages
             everyItems = abcManager.GetEveryItems();
             GetCustomerInfo();
 
+            // get initial Value
+
+            /*    int value = (int)HttpContext.Session.GetInt32("SaleNumber")!;*/
 
         }
         public void OnPost()
         {
-            ABCPOS abcManager = new ABCPOS();
-            everyItems = abcManager.GetEveryItems();
-            GetCustomerInfo();
+            ABCPOS ABCHardWare = new ABCPOS();
+            everyItems = ABCHardWare.GetEveryItems();
 
-
-            SaleItem item = new()
-            {
-                ItemCode = _ItemCode,
-                Quantity = _Quantity,
-                Description = _Description,
-                UnitPrice = _UnitPrice
-            
-            };
-
-            ABCPOS ABCHardware = new ABCPOS();
-            Sale ABCSALE = new Sale()
+            sale = new()
             {
                 CustomerID = SelectValue,
                 SaleDate = DateTime.Now,
                 SaleNumber = GenerateNineDigitRandomNum(),
-                SalePerson = "Jenny Brooks",
-                SaleItem = item
-          
-
-
+                SalePerson = "Jenny Brooks"
             };
 
+            UpdateQuantity();
 
-            int customerIDD = ABCSALE.CustomerID;
-            DateTime SaleDa = ABCSALE.SaleDate;
-            int SaleNum = ABCSALE.SaleNumber;
-            string SalePerson = ABCSALE.SalePerson;
-            string itemCode = ABCSALE.SaleItem.ItemCode;
+            SaleNumber = ProssSale(sale);
+            HttpContext.Session.SetInt32("SaleNumber", SaleNumber);
 
-
-            int saleNumber = ABCHardware.ProcessSale(ABCSALE);
-            /*  ABCPOS ABCHardWare = new ABCPOS();
-              everyItems = ABCHardWare.GetEveryItems();
-
-              sale = new() {
-               CustomerID = SelectValue,
-               SaleDate = DateTime.Now,
-               SaleNumber = GenerateNineDigitRandomNum(),
-               SalePerson = "Jenny Brooks"
-              };
-
-              UpdateQuantity();
-
-              SaleNumber = ProssSale(sale);
-              HttpContext.Session.SetInt32("SaleNumber", SaleNumber);
-
-              ResultSaleNumber = (int)HttpContext.Session.GetInt32("SaleNumber")!;
+            ResultSaleNumber = (int)HttpContext.Session.GetInt32("SaleNumber")!;
 
 
-              GetCustomerInfo();*/
-            /*  ABCPOS ABCHardWare = new ABCPOS();
-               ABCSALE sale = new()
-               {  
-                    CustomerID
-
-
-               }*/
-
-            /* int SaleNumber=  ABCHardWare.ProcessSale(sale);*/
-
-
+            GetCustomerInfo();
 
 
         }
@@ -177,7 +129,6 @@ namespace ABCHardware_Project.Pages
             CustomerInfo = customerManager.GetCustomerInformation();
 
         }
-
 
     }
 }

@@ -1,10 +1,10 @@
 ﻿@page
-@model ABCHardware_Project.Pages.ProcessSaleModel
+@model ABCHardware_Project.Pages.TESTTESTModel
 @{
-    ViewData["Title"] = "Process Sale";
-
 }
-@section ProcessSalescriptContent
+
+
+@section TESTProcessSalescriptContent
     {
     <script src="~/libraries/jquery/jquery.js"> </script>
     <script src="~/libraries/jquery-validate/jquery.validate.js"></script>
@@ -96,7 +96,7 @@
     }
 
 
-@section ProcessSalesContent{
+@section TESTProcessSalesContent{
 
 
     @if (Model.everyItems != null)
@@ -143,9 +143,8 @@
                             <td><input class="unitPrice" value="@val.UnitPrice" readonly /></td>
                             <td><input name="_Quantity" class="quantity" value="0" max="@val.Quantity" /></td>
                             <td>
-                                <input value="Add" type="submit" onclick="return addToCart(this)" class="buttons" />
+                                <input type="submit" value="Purchase Item" onclick="return addToCart(this)" class="buttons" />
                             </td>
-                       
 
                         </tr>
 
@@ -190,10 +189,7 @@
                 <div id="totalGST"></div>
                 <div id="grandTotalDiv"></div>
                 <br></br>
-              
-              <td>
-                    <input type="submit" value="Process Sale"  class="buttons" />
-                </td> 
+               @* <input type="submit" name="Sumit" value="Clear Items" class="buttons" onclick="clearLocalStorage();" asp-page-handler="FindItem" />*@
             </form>
         }
     </div>

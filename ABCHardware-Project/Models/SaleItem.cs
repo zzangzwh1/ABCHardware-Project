@@ -2,7 +2,7 @@
 
 namespace ABCHardware_Project.Models
 {
-    public class Item
+    public class SaleItem
     {
 
         public string ItemCode { get; set; } = string.Empty;
