@@ -1,4 +1,5 @@
 using ABCHardware_Project.Models;
+using ABCHardware_Project.TechService;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace ABCHardware_Project.Pages
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only Alphabet is Valid ex) Cho/cho")]
         public string FindLastName { get; set; } = string.Empty;
         [BindProperty]
-        [Required(ErrorMessage = "Please Selectd Customer")]
+        [Required(ErrorMessage = "Please Selected Customer")]
         public int CustomerIDSelect { get; set; }
 
 
@@ -45,8 +46,13 @@ namespace ABCHardware_Project.Pages
         public int _Quantity { set; get; }
 
         public string myDecimal = "";
+        public int SaleNumber { get; set; }
+        
+        public int ResultSaleNumber { get; set; }
+        [BindProperty]
+        public int SelectValue { set; get; }
 
-
+        public Models.ABCSales sale { get; set; } = null!;
         [BindProperty]
         public List<string> list { set; get; } = null;
 
@@ -56,17 +62,49 @@ namespace ABCHardware_Project.Pages
             ABCPOS abcManager = new ABCPOS();
             everyItems = abcManager.GetEveryItems();
             GetCustomerInfo();
+         
+            // get initial Value
+
+        /*    int value = (int)HttpContext.Session.GetInt32("SaleNumber")!;*/
 
         }
         public void OnPost()
         {
-            ABCPOS abcManager = new ABCPOS();
-            everyItems = abcManager.GetEveryItems();
-            GetCustomerInfo();
+            ABCPOS ABCHardWare = new ABCPOS();
+            everyItems = ABCHardWare.GetEveryItems();
+
+            sale = new() {
+             CustomerID = SelectValue,
+             SaleDate = DateTime.Now,
+             SaleNumber = GenerateNineDigitRandomNum(),
+             SalePerson = "Jenny Brooks"
+            };
+
             UpdateQuantity();
 
+            SaleNumber = ProssSale(sale);
+            HttpContext.Session.SetInt32("SaleNumber", SaleNumber);
 
-            string s = "";
+            ResultSaleNumber = (int)HttpContext.Session.GetInt32("SaleNumber")!;
+
+
+            GetCustomerInfo();
+
+
+        }
+     
+        public int GenerateNineDigitRandomNum()
+        {
+            Random random = new Random();
+            int randomNumber = random.Next(100000000, 999999999);
+            return randomNumber;
+
+        }
+        public int ProssSale(Models.ABCSales sales)
+        {
+            ABCPOS abcManager = new ABCPOS();
+            int saleNumber = abcManager.ProcessSale(sales);
+            return saleNumber;
         }
         public void UpdateQuantity()
         {

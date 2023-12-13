@@ -55,7 +55,7 @@ namespace ABCHardware_Project.Models
             Models.Item customerInformation = itemManager.GetItemInformation(itemCode);
             return customerInformation;
         }
-        public bool UpateItem(Item item)
+        public bool UpdateItem(Item item)
         {
             TechService.Item itemManager = new TechService.Item();
             bool isSuccess = itemManager.UpdateItems(item);
@@ -79,9 +79,9 @@ namespace ABCHardware_Project.Models
 
             return items;
         }
-        public int ProcessSale(Sales saleItem)
+        public int ProcessSale(ABCSales saleItem)
         {
-            TechService.Sales saleManager = new TechService.Sales();
+            TechService.ABCSales saleManager = new TechService.ABCSales();
             int saleNum = saleManager.AddSale(saleItem);
 
             return saleNum;
@@ -89,11 +89,12 @@ namespace ABCHardware_Project.Models
         public bool UpdateItemQuantity(Models.Item item)
         {
             TechService.Item itemManager = new TechService.Item();
-           bool isSucess = itemManager.UpdateQuantityItem(item);
+            bool isSuccess = itemManager.UpdateQuantityItem(item);
 
 
-            return isSucess;
+            return isSuccess;
         }
+   
 
     }
 }

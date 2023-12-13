@@ -3,10 +3,10 @@ using System.Data;
 
 namespace ABCHardware_Project.TechService
 {
-    public class Sales
+    public class ABCSales
     {
         private readonly string _connectionString;
-        public Sales()
+        public ABCSales()
         {
             // Constructor Logic
             ConfigurationBuilder databaseUserBuilder = new ConfigurationBuilder();
@@ -18,9 +18,9 @@ namespace ABCHardware_Project.TechService
         }
 
         #region AddSales
-        public int AddSale(Models.Sales sales)
+        public int AddSale(Models.ABCSales sales)
         {
-           // int saleNumber = 0;
+
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -56,7 +56,10 @@ namespace ABCHardware_Project.TechService
             }
             return sales.SaleNumber;
         }
-#endregion
+        #endregion
+
+       
 
     }
 }
+

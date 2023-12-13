@@ -1,6 +1,6 @@
 ﻿namespace ABCHardware_Project.Models
 {
-    public class Sales
+    public class ABCSales
     {
         public int SaleNumber { get; set; }
         public int CustomerID { get; set; }

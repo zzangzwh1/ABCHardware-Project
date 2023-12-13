@@ -70,7 +70,7 @@
                 totalUnitPrice += itemTotalUnitPrice;
 
                 // Calculate GST for each item (assuming GST is 10%)
-                var itemGST = 0.1 * itemTotalUnitPrice;
+                var itemGST = 0.05 * itemTotalUnitPrice;
                 totalGST += itemGST;
 
                 newRow.insertCell(0).innerHTML = cartItems[i].customerID;
@@ -82,9 +82,9 @@
             }
 
             // Update the content of separate div elements
-            totalUnitPriceDiv.innerHTML = 'Total Unit Price: $' + totalUnitPrice;
-            totalGSTDiv.innerHTML = 'Total GST: $' + totalGST;
-            grandTotalDiv.innerHTML = 'Grand Total: $' + (totalUnitPrice + totalGST);
+            totalUnitPriceDiv.innerHTML = 'Total Unit Price: $ ' + totalUnitPrice;
+            totalGSTDiv.innerHTML = 'Total GST(5%): $ ' + totalGST;
+            grandTotalDiv.innerHTML = 'Grand Total: $ ' + (totalUnitPrice + totalGST);
         }
         function clearLocalStorage() {
             localStorage.clear();
@@ -101,11 +101,20 @@
 
     @if (Model.everyItems != null)
     {
-            <div class="messages">
-                <form name="SampleForm" method="post">
+        <div class="messages">
+            <h1> Process Sale </h1>
+            <br></br>
+
+        @foreach (var val in Model.everyItems)
+        {
+
+            <form name="SampleForm" method="post">
 
 
+                <br></br>
 
+
+            
                     <table id="itemTable" border="1">
                         <tr>
                             <th>Select Customer</th>
@@ -113,13 +122,14 @@
                             <th>Description</th>
                             <th>Unit Price</th>
                             <th>Quantity</th>
-                            <th>Action</th>
+                            <th>Purchase</th>
                         </tr>
+
 
                         <tr>
                             <td>
                                 <label for="SelectValue">Select Existing Student ID: </label>
-                                <select class="customerSelect" style="width: 20%; height: 30px;">
+                                <select class="customerSelect" name="SelectValue" style="width: 30%; height: 30px;">
                                     <option value="" class="selectionProgramCode">Select Student ID</option>
                                     @foreach (var id in Model.CustomerInfo)
                                     {
@@ -133,41 +143,55 @@
                             <td><input class="unitPrice" value="@val.UnitPrice" readonly /></td>
                             <td><input name="_Quantity" class="quantity" value="0" max="@val.Quantity" /></td>
                             <td>
-                                <input type="submit" value="Submit" onclick="return addToCart(this)" class="buttons" />
+                                <input type="submit" value="Purchase Item" onclick="return addToCart(this)" class="buttons" />
                             </td>
 
                         </tr>
 
                     </table>
-
-                    <br></br>
-
-
-
-                </form>
+          
+                <br></br>
 
 
-        }
+
+            </form>
+            }
+        </div>
+
+
+    }
 
     <div class="messages">
-        <h2>Purchased Item!</h2>
-        <form name="sample" method="post">
-            <table id="cartTable" border="1">
-                <tr>
-                    <th>Customer ID</th>
-                    <th>Item Code</th>
-                    <th>Description</th>
-                    <th>Unit Price</th>
-                    <th>Quantity</th>
-                </tr>
-            </table>
 
-            <div id="totalUnitPrice"></div>
-            <div id="totalGST"></div>
-            <div id="grandTotalDiv"></div>
+        @if (Model.sale != null)
+        {
 
-            <input type="submit" name="Sumit" value="Clear Items" class="buttons" onclick="clearLocalStorage();" />
-        </form>
+
+            <h2>ABC HardWare Sale Receipt</h2>
+
+            <p>SaleNumber : @Model.sale.SaleNumber </p>
+            <p>Sale Date : @Model.sale.SaleDate </p>   
+            <p>Sale Person : @Model.sale.SalePerson </p>
+
+            <br></br>
+            <form name="sample" method="post">
+                <table id="cartTable" border="1">
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Item Code</th>
+                        <th>Description</th>
+                        <th>Unit Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                </table>
+                <br></br>
+                <div id="totalUnitPrice"></div>
+                <div id="totalGST"></div>
+                <div id="grandTotalDiv"></div>
+                <br></br>
+                <input type="submit" name="Sumit" value="Clear Items" class="buttons" onclick="clearLocalStorage();" asp-page-handler="FindItem" />
+            </form>
+        }
     </div>
 
 

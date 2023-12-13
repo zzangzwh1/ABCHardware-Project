@@ -73,7 +73,7 @@ namespace ABCHardware_Project.Pages
 
             ABCPOS abcHardwareCustomer = new ABCPOS();
 
-            bool isUpdateCustomer = abcHardwareCustomer.UpateItem(items);
+            bool isUpdateCustomer = abcHardwareCustomer.UpdateItem(items);
 
             if (isUpdateCustomer)
             {
