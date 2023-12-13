@@ -56,25 +56,9 @@ namespace ABCHardware_Project.Pages
         public void OnGet()
         {
 
-
             ABCPOS abcManager = new ABCPOS();
             everyItems = abcManager.GetEveryItems();
             GetCustomerInfo();
-            /*
-                        HttpContext.Session.SetString("iCode", _ItemCode);
-                        HttpContext.Session.SetString("iDescription", _Description);
-
-                        HttpContext.Session.SetString("iUnit", _UnitPrice.ToString());
-
-                        HttpContext.Session.SetString("iQuantity", _Quantity.ToString());
-                        string iCode = (string)HttpContext.Session.GetString("iCode")!;
-                        string iDescription = (string)HttpContext.Session.GetString("iDescription")!;
-                        string iUnit = (string)HttpContext.Session.GetString("iUnit")!;
-                        string iQuantity = (string)HttpContext.Session.GetString("iQuantity")!;
-                        list.Add(iCode);
-                        list.Add(iDescription);
-                        list.Add(iUnit);
-                        list.Add(iQuantity);*/
 
         }
         public void OnPost()
@@ -90,11 +74,6 @@ namespace ABCHardware_Project.Pages
                 SalePerson = "Jenny Brooks",
                 SaleNumber = saleNumber,
                 SaleDate = DateTime.Now
-
-            };
-
-
-           // int saleNum = abcManager.ProcessSale(saleItem);
 
 
             string s = "";
