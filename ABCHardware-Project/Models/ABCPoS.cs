@@ -13,10 +13,10 @@ namespace ABCHardware_Project.Models
             return isAddCustomer;
         }
 
-        public List<Customer> FindCustomerWtihfirstOrLastName(string firstOrLastName)
+        public List<Customer> FindCustomerWtihName(string firstOrLastName)
         {
             TechService.Customer customer = new TechService.Customer();
-            List<Customer> customers = customer.FindCustomerWtihName(firstOrLastName);
+            List<Customer> customers = customer.FindCustomerWtihLastName(firstOrLastName);
 
 
             return customers;
@@ -79,10 +79,10 @@ namespace ABCHardware_Project.Models
 
             return items;
         }
-        public int ProcessSale(Sale saleItem)
+        public int ProcessSale(Sale ABCSale)
         {
-            TechService.Sales saleManager = new TechService.Sales();
-            int saleNum = saleManager.AddSale(saleItem);
+            TechService.Sales SaleManager = new TechService.Sales();
+            int saleNum = SaleManager.AddSale(ABCSale);
 
             return saleNum;
         }

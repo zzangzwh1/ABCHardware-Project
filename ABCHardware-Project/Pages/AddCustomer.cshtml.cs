@@ -10,25 +10,27 @@ namespace ABCHardware_Project.Pages
         public string Message { get; set; } = string.Empty;
 
         [BindProperty]
-        [Required(ErrorMessage = "Please insert your First name")]
+        [Required(ErrorMessage = "Please insert Customer First name")]
 
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only Alphabet is Valid ex) mike/Mike")]
         public string FirstName { get; set; } = string.Empty;
         [BindProperty]
-        [Required(ErrorMessage = "Please insert your Last name")]
+        [Required(ErrorMessage = "Please insert Customer Last name")]
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only Alphabet is Valid ex) Cho/cho")]
         public string LastName { get; set; } = string.Empty;
         [BindProperty]
-        [Required(ErrorMessage = "Please insert your Address")]
+        [Required(ErrorMessage = "Please insert Customer Address")]
         public string Address { get; set; } = string.Empty;
         [BindProperty]
-        [Required(ErrorMessage = "Please insert your City")]
+        [Required(ErrorMessage = "Please insert Customer City")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only Alphabet is Valid ex) Edmonton/edmonton")]
         public string City { get; set; } = string.Empty;
         [BindProperty]
-        [Required(ErrorMessage = "Please insert your Province")]
+        [Required(ErrorMessage = "Please insert Customer Province")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only Alphabet is Valid ex) Alberta/AB")]
         public string Province { get; set; } = string.Empty;
         [BindProperty]
-        [Required(ErrorMessage = "Please insert your Postal Code")]
+        [Required(ErrorMessage = "Please insert Customer Postal Code")]
         [RegularExpression(@"[A-Z][0-9][A-Z] [0-9][A-Z][0-9]", ErrorMessage = "Invalid PostalCode format ex)T6G 0Z4")]
         public string PostalCode { get; set; } = string.Empty;
         public void OnGet()

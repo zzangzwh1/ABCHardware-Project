@@ -7,25 +7,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text.Json;
+
+
 
 namespace ABCHardware_Project.Pages
 {
     public class ProcessSaleModel : PageModel
     {
-        [BindProperty]
-        [Required(ErrorMessage = "Please insert Sales FullName")]
-        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Only alphabet characters and spaces are valid, e.g., Mike Cho")]
-        public string _SalePerson { get; set; } = string.Empty;
+
         public List<Models.Customer> CustomerInfo = null!;
         public string Message { get; set; } = string.Empty;
-        [BindProperty]
-        [Required(ErrorMessage = "Please insert Customer Last name")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only Alphabet is Valid ex) Cho/cho")]
-        public string FindLastName { get; set; } = string.Empty;
-        [BindProperty]
-        [Required(ErrorMessage = "Please Selected Customer")]
-        public int CustomerIDSelect { get; set; }
-
+  
 
         public List<Models.SaleItem> everyItems = null!;
 
@@ -44,69 +40,55 @@ namespace ABCHardware_Project.Pages
         [Required(ErrorMessage = "Please Set Quantity")]
         [Range(1, int.MaxValue, ErrorMessage = "Quantity must be between 1 and the maximum value.")]
         public int _Quantity { set; get; }
-
-        public string myDecimal = "";
-       /* public int SaleNumber { get; set; }
-*/
+  
         public int ResultSaleNumber { get; set; }
         [BindProperty]
         public int SelectValue { set; get; }
 
-        public Models.Sale sale { get; set; } = null!;
+        public Models.Sale ABCSALE { get; set; } = new Models.Sale();  
+
         [BindProperty]
-        public List<string> list { set; get; } = null;
+        public List<Sale> ABCSale { get; set; } = new List<Sale>();
 
         public void OnGet()
         {
 
-            ABCPOS abcManager = new ABCPOS();
-            everyItems = abcManager.GetEveryItems();
-            GetCustomerInfo();
+            DisplayItems();
 
 
         }
         public void OnPost()
         {
+            DisplayItems();
+            int SaleNumber = 0;
+            int saleNumber = GenerateNineDigitRandomNum();
+            foreach (var AbcSale in ABCSale)
+            {
+                
+                ABCPOS ABCHardWare = new ABCPOS();
+                AbcSale.SalePerson = "Jenny Brooks";
+                AbcSale.SaleNumber = saleNumber;
+                AbcSale.SaleDate = DateTime.Now;
+                SaleNumber = ABCHardWare.ProcessSale(AbcSale);
+
+
+            }
+            if (SaleNumber != 0)
+            {
+                Message = "Item is SuccessFully Processed";
+            }
+            else
+            {
+                Message = "Fail";
+            }
+           
+        }
+        public void DisplayItems()
+        {
             ABCPOS abcManager = new ABCPOS();
             everyItems = abcManager.GetEveryItems();
             GetCustomerInfo();
-
-
-            SaleItem item = new()
-            {
-                ItemCode = _ItemCode,
-                Quantity = _Quantity,
-                Description = _Description,
-                UnitPrice = _UnitPrice
-            
-            };
-
-            ABCPOS ABCHardware = new ABCPOS();
-            Sale ABCSALE = new Sale()
-            {
-                CustomerID = SelectValue,
-                SaleDate = DateTime.Now,
-                SaleNumber = GenerateNineDigitRandomNum(),
-                SalePerson = "Jenny Brooks",
-                SaleItem = item
-          
-
-
-            };
-
-
-            int customerIDD = ABCSALE.CustomerID;
-            DateTime SaleDa = ABCSALE.SaleDate;
-            int SaleNum = ABCSALE.SaleNumber;
-            string SalePerson = ABCSALE.SalePerson;
-            string itemCode = ABCSALE.SaleItem.ItemCode;
-
-
-
-
-
         }
-
         public int GenerateNineDigitRandomNum()
         {
             Random random = new Random();
@@ -122,7 +104,9 @@ namespace ABCHardware_Project.Pages
             CustomerInfo = customerManager.GetCustomerInformation();
 
         }
+ 
 
 
     }
+   
 }

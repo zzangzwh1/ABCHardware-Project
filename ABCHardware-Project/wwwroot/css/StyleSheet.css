@@ -142,3 +142,9 @@ main {
     background-color: #eee;
     cursor: not-allowed;
 }
+.InputColor{
+    background-color:grey;
+    color:black;
+    font-weight:bold;
+    width:165px;
+}

@@ -62,7 +62,7 @@ namespace ABCHardware_Project.TechService
         #endregion
 
         #region Find Customer
-        public List<Models.Customer> FindCustomerWtihName(string firstOrLastName)
+        public List<Models.Customer> FindCustomerWtihLastName(string lastName)
         {
 
             List<Models.Customer> customerInfo = new List<Models.Customer>();
@@ -73,7 +73,7 @@ namespace ABCHardware_Project.TechService
                 conn.Open();
                 using (SqlCommand command = new SqlCommand("FindCustomer", conn))
                 {
-                    command.Parameters.AddWithValue("@FirstOrLastName", firstOrLastName).SqlDbType = SqlDbType.NVarChar;
+                    command.Parameters.AddWithValue("@LastName", lastName).SqlDbType = SqlDbType.NVarChar;
                     command.CommandType = CommandType.StoredProcedure;
                     try
                     {
@@ -104,7 +104,7 @@ namespace ABCHardware_Project.TechService
                             }
                             else
                             {
-                                Console.WriteLine($"There are No Student exists with that student ID try other Student ID");
+                                customerInfo = null!;
                             }
 
 
@@ -112,7 +112,7 @@ namespace ABCHardware_Project.TechService
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Error Occurred - {ex.Message}");
+                        customerInfo = null!;
                     }
                     finally
                     {

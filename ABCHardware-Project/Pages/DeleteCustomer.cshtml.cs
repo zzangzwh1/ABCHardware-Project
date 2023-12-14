@@ -43,16 +43,16 @@ namespace ABCHardware_Project.Pages
         {
            
             ABCPOS abcHardwareCustomer = new ABCPOS();
-            customers = abcHardwareCustomer.FindCustomerWtihfirstOrLastName(FindLastName);
+            customers = abcHardwareCustomer.FindCustomerWtihName(FindLastName);
 
-            if (customers.Count == 0)
+            if (customers is null)
             {
                 Message = "Customer is not Exists!";
                 customers = null!;
             }
             else
             {
-                Message = "Please Select for Deleting Customer Information";
+                Message = "Please Click Delete Button For Deleting Customer";
             }
         }
         public void OnPostDelete()

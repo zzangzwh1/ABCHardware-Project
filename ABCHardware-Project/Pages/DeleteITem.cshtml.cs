@@ -44,7 +44,7 @@ namespace ABCHardware_Project.Pages
             }
             else
             {
-                Message = "Modify Item Information";
+                Message = "Please Click Delete Button If you want to Delete Item";
                 if (items.ItemCode == "")
                 {
                     items = null!;
@@ -54,7 +54,7 @@ namespace ABCHardware_Project.Pages
         }
         public void OnPostDelete()
         {
-            Message = "Please Modify information! ";
+          
             string itemCode = _ItemCode;
 
             ABCPOS abcHardwareCustomer = new ABCPOS();
