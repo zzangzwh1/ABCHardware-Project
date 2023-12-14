@@ -102,36 +102,6 @@ namespace ABCHardware_Project.Pages
             string itemCode = ABCSALE.SaleItem.ItemCode;
 
 
-            int saleNumber = ABCHardware.ProcessSale(ABCSALE);
-            /*  ABCPOS ABCHardWare = new ABCPOS();
-              everyItems = ABCHardWare.GetEveryItems();
-
-              sale = new() {
-               CustomerID = SelectValue,
-               SaleDate = DateTime.Now,
-               SaleNumber = GenerateNineDigitRandomNum(),
-               SalePerson = "Jenny Brooks"
-              };
-
-              UpdateQuantity();
-
-              SaleNumber = ProssSale(sale);
-              HttpContext.Session.SetInt32("SaleNumber", SaleNumber);
-
-              ResultSaleNumber = (int)HttpContext.Session.GetInt32("SaleNumber")!;
-
-
-              GetCustomerInfo();*/
-            /*  ABCPOS ABCHardWare = new ABCPOS();
-               ABCSALE sale = new()
-               {  
-                    CustomerID
-
-
-               }*/
-
-            /* int SaleNumber=  ABCHardWare.ProcessSale(sale);*/
-
 
 
 
@@ -144,32 +114,7 @@ namespace ABCHardware_Project.Pages
             return randomNumber;
 
         }
-        public int ProssSale(Models.Sale sales)
-        {
-            ABCPOS abcManager = new ABCPOS();
-            int saleNumber = abcManager.ProcessSale(sales);
-            return saleNumber;
-        }
-        public void UpdateQuantity()
-        {
-            Models.SaleItem items = new()
-            {
-                ItemCode = _ItemCode,
-                Quantity = _Quantity
 
-            };
-
-            ABCPOS abcManager = new ABCPOS();
-            bool isUpdated = abcManager.UpdateItemQuantity(items);
-            if (isUpdated)
-            {
-                Message = "Success";
-            }
-            else
-            {
-                Message = "Fail!";
-            }
-        }
 
         public void GetCustomerInfo()
         {
