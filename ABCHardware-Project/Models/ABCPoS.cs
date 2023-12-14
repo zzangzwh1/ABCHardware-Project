@@ -86,11 +86,6 @@ namespace ABCHardware_Project.Models
 
             return saleNum;
         }
-        public bool UpdateItemQuantity(Models.SaleItem item)
-        {
-            TechService.Item itemManager = new TechService.Item();
-            bool isSuccess = itemManager.UpdateQuantityItem(item);
-
 
    
 
