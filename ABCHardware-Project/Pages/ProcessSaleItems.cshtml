@@ -52,6 +52,8 @@
             existingCartItems.push(cartItem);
             localStorage.setItem("cartItems", JSON.stringify(existingCartItems));
 
+            let sampleForm = document.getElementById("sampleForms");
+            sampleForm.style.display = "block";
             // Refresh the cart table
             loadCartItems();
 
@@ -207,7 +209,9 @@
            
                     
               
-                <form name="sample" method="post">
+                <form name="sample" method="post" id="sampleForms" style="display:none">
+
+                    <h1 style="text-align:center">Process Sale Items</h1>
                     <table id="cartTable" border="1">
                         <tr>
                             <th> <input type="text" value="Customer ID" class="InputColor" readonly></th>
