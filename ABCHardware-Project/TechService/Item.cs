@@ -21,7 +21,6 @@ namespace ABCHardware_Project.TechService
 
         #region Add Item
 
-
         public bool AddItem(Models.SaleItem items)
         {
 
@@ -60,44 +59,6 @@ namespace ABCHardware_Project.TechService
         }
         #endregion
 
-        #region
-        public bool AddTempItem(Models.SaleItem items)
-        {
-
-            using (SqlConnection conn = new SqlConnection(_connectionString))
-            {
-                conn.Open();
-                using (SqlCommand command = new SqlCommand("CreateTempItem", conn))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    try
-                    {
-                        command.Parameters.AddWithValue("@ItemCode", items.ItemCode).SqlDbType = SqlDbType.NVarChar;
-                        command.Parameters.AddWithValue("@Description", items.Description).SqlDbType = SqlDbType.NVarChar;
-                        command.Parameters.AddWithValue("@UnitPrice", items.UnitPrice).SqlDbType = SqlDbType.Decimal;
-                        command.Parameters.AddWithValue("@Quantity", items.Quantity).SqlDbType = SqlDbType.Int;
-
-                        command.ExecuteNonQuery();
-
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Error-Occurred - {ex.Message}");
-                        return false;
-                    }
-                    finally
-                    {
-                        conn.Close();
-                    }
-
-
-                }
-            }
-            return true;
-        }
-        #endregion
 
         #region GetItemInformation
 
@@ -160,7 +121,7 @@ namespace ABCHardware_Project.TechService
         }
         #endregion
 
-        #region
+        #region UpdateItems
         public bool UpdateItems(Models.SaleItem items)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
