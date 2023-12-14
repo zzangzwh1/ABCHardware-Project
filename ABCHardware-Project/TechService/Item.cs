@@ -121,7 +121,7 @@ namespace ABCHardware_Project.TechService
         }
         #endregion
 
-        #region UpdateItems
+        #region  UpdateItems
         public bool UpdateItems(Models.SaleItem items)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
@@ -255,37 +255,6 @@ namespace ABCHardware_Project.TechService
 
         #endregion
 
-        #region Update Quantity Item 
-        public bool UpdateQuantityItem(Models.SaleItem items)
-        {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
-            {
-                conn.Open();
-                using (SqlCommand command = new SqlCommand("UpdateItemQuantity", conn))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    try
-                    {
-                        command.Parameters.AddWithValue("@ItemCode", items.ItemCode).SqlDbType = SqlDbType.NVarChar;
-                        command.Parameters.AddWithValue("@Quantity", items.Quantity).SqlDbType = SqlDbType.Int;
-
-                        command.ExecuteNonQuery();
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Error Occurred {ex.Message}");
-                        return false;
-                    }
-                    finally
-                    {
-                        conn.Close();
-                    }
-                }
-
-            }
-            return true;
-        }
-        #endregion
+     
     }
 }

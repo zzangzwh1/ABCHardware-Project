@@ -59,7 +59,7 @@ namespace ABCHardware_Project.TechService
         }
         #endregion
 
-       
+
 
     }
 }

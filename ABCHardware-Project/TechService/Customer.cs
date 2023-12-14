@@ -61,7 +61,7 @@ namespace ABCHardware_Project.TechService
         }
         #endregion
 
-        #region Find Customer
+        #region FindCustomerWtihLastName
         public List<Models.Customer> FindCustomerWtihLastName(string lastName)
         {
 
@@ -227,7 +227,7 @@ namespace ABCHardware_Project.TechService
         }
         #endregion
 
-        #region
+        #region DeleteCustomers
 
         public bool DeleteCustomers(int customerID)
         {
@@ -263,8 +263,7 @@ namespace ABCHardware_Project.TechService
         }
         #endregion
 
-      #region
-
+        #region GetCustomerInformation
 
         public List<Models.Customer> GetCustomerInformation()
         {
