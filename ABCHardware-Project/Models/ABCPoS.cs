@@ -92,8 +92,6 @@ namespace ABCHardware_Project.Models
             bool isSuccess = itemManager.UpdateQuantityItem(item);
 
 
-            return isSuccess;
-        }
    
 
     }
