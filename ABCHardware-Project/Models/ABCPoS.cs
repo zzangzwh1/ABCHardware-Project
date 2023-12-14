@@ -86,7 +86,7 @@ namespace ABCHardware_Project.Models
 
             return saleNum;
         }
-
+        
    
 
     }

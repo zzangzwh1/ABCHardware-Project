@@ -56,7 +56,7 @@
             loadCartItems();
 
             // Add to SampleTable
-           // addToSampleTable(cartItem);
+            //addToSampleTable(cartItem);
 
             return true;
         }
@@ -75,20 +75,20 @@
 
         function loadCartItems() {
             var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-            var cartTable = document.getElementById("cartTable");
+           // var cartTable = document.getElementById("cartTable");
             var totalUnitPriceDiv = document.getElementById("totalUnitPrice");
             var totalGSTDiv = document.getElementById("totalGST");
             var grandTotalDiv = document.getElementById("grandTotalDiv");
 
-            while (cartTable.rows.length > 1) {
-                cartTable.deleteRow(1);
-            }
+           // while (cartTable.rows.length > 1) {
+           //     cartTable.deleteRow(1);
+           // }
 
             let totalUnitPrice = 0;
             let totalGST = 0;
 
             for (var i = 0; i < cartItems.length; i++) {
-                var newRow = cartTable.insertRow(-1);
+               // var newRow = cartTable.insertRow(-1);
 
                 // Calculate total unit price for each item
                 var itemTotalUnitPrice = cartItems[i].unitPrice * cartItems[i].quantity;
