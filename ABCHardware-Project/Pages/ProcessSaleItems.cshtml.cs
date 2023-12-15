@@ -76,7 +76,7 @@ namespace ABCHardware_Project.Pages
             if (SaleNumber != 0 || ModelState.IsValid)
             {
                
-                Message = "Item is SuccessFully Processed";
+                Message = "Item is SuccessFully Processed ";
             }
             else
             {
