@@ -48,7 +48,7 @@ namespace ABCHardware_Project.Pages
         public Models.Sale ABCSALE { get; set; } = new Models.Sale();  
 
         [BindProperty]
-        public List<Sale> ABCSale { get; set; } = new List<Sale>();
+        public List<Sale> ABCSale { get; set; } = new List<Sale>();        
 
         public void OnGet()
         {
@@ -62,19 +62,20 @@ namespace ABCHardware_Project.Pages
             DisplayItems();
             int SaleNumber = 0;
             int saleNumber = GenerateNineDigitRandomNum();
+
+
             foreach (var AbcSale in ABCSale)
             {
-                
-                ABCPOS ABCHardWare = new ABCPOS();
-                AbcSale.SalePerson = "Jenny Brooks";
+                ABCPOS ABCHardWare = new ABCPOS(); 
                 AbcSale.SaleNumber = saleNumber;
                 AbcSale.SaleDate = DateTime.Now;
                 SaleNumber = ABCHardWare.ProcessSale(AbcSale);
 
 
             }
-            if (SaleNumber != 0)
+            if (SaleNumber != 0 || ModelState.IsValid)
             {
+               
                 Message = "Item is SuccessFully Processed";
             }
             else

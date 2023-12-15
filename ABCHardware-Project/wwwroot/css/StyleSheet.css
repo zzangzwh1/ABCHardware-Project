@@ -139,12 +139,19 @@ main {
 }
 /* Adjust styles for readonly inputs */
 .inputTexts[readonly] {
-    background-color: #eee;
+    background-color: red;
     cursor: not-allowed;
+    text-align:center
 }
-.InputColor{
-    background-color:grey;
-    color:black;
-    font-weight:bold;
-    width:165px;
+.InputColor {
+    display: inline-block;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    gap:10px;
+    width: 174px;
+}
+.YourClass{
+    text-align:center;
+  
 }

@@ -32,11 +32,26 @@
             let unitPrice = tableRow.querySelector(".unitPrice").value;
             let quantity = tableRow.querySelector(".quantity").value;
 
-            if (customerID === "") {
+
+            //Test
+            let pattern = /^[A-Za-z\s]+$/;
+            let salePerson = document.querySelector("._SalePerson").value;
+            let numberPattern = /^[0-9]+$/;
+
+            if (salePerson === "") {
+                alert('Please insert Sale Person Name');
+                return false;
+            } else if (!pattern.test(salePerson)) {
+                alert('Please use only alphabets and spaces. Valid examples: "Mike Cho" or "mike cho"');
+                return false;
+            } else if (customerID === "") { 
                 alert('Please Select Customer ID');
                 return false;
-            } else if (quantity === "" || quantity == 0) {
+            } else if (quantity === "" || quantity == 0) { 
                 alert('Quantity must not be empty or 0. Please insert a valid quantity.');
+                return false;
+            } else if (!numberPattern.test(quantity)) { 
+                alert('Quantity must be a Number.');
                 return false;
             }
 
@@ -45,7 +60,10 @@
                 itemCode: itemCode,
                 description: description,
                 unitPrice: unitPrice,
-                quantity: quantity
+                quantity: quantity,
+
+
+                salePerson: salePerson
             };
 
             var existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -68,11 +86,15 @@
             var newRow = sampleTable.insertRow(-1);
 
 
-            newRow.insertCell(0).innerHTML = '<input name="ABCSale[' + newRow.rowIndex + '].CustomerID" value="' + cartItem.customerID + '">';
-            newRow.insertCell(1).innerHTML = '<input name="ABCSale[' + newRow.rowIndex + '].SaleItem.ItemCode" value="' + cartItem.itemCode + '">';
-            newRow.insertCell(2).innerHTML = '<input name="ABCSale[' + newRow.rowIndex + '].SaleItem.Description" value="' + cartItem.description + '">';
-            newRow.insertCell(3).innerHTML = '<input name="ABCSale[' + newRow.rowIndex + '].SaleItem.UnitPrice" value="' + cartItem.unitPrice + '">';
-            newRow.insertCell(4).innerHTML = '<input name="ABCSale[' + newRow.rowIndex + '].SaleItem.Quantity" value="' + cartItem.quantity + '">';
+
+            newRow.insertCell(0).innerHTML = '<input name="ABCSale[' + newRow.rowIndex + '].CustomerID" value="' + cartItem.customerID + '" readonly class="YourClass">';
+            newRow.insertCell(1).innerHTML = '<input name="ABCSale[' + newRow.rowIndex + '].SaleItem.ItemCode" value="' + cartItem.itemCode + '" readonly class="YourClass">';
+            newRow.insertCell(2).innerHTML = '<input name="ABCSale[' + newRow.rowIndex + '].SaleItem.Description" value="' + cartItem.description + '" readonly class="YourClass">';
+            newRow.insertCell(3).innerHTML = '<input name="ABCSale[' + newRow.rowIndex + '].SaleItem.UnitPrice" value="' + cartItem.unitPrice + '" readonly class="YourClass">';
+            newRow.insertCell(4).innerHTML = '<input name="ABCSale[' + newRow.rowIndex + '].SaleItem.Quantity" value="' + cartItem.quantity + '" readonly class="YourClass">';
+
+            //
+            newRow.insertCell(5).innerHTML = '<input name="ABCSale[' + newRow.rowIndex + '].SalePerson" value="' + cartItem.salePerson + '" readonly class="YourClass">';
         }
 
         function loadCartItems() {
@@ -140,6 +162,7 @@
                 addHiddenField(form, "_CartItems[" + i + "].Description", existingCartItems[i].description);
                 addHiddenField(form, "_CartItems[" + i + "].UnitPrice", existingCartItems[i].unitPrice);
                 addHiddenField(form, "_CartItems[" + i + "].Quantity", existingCartItems[i].quantity);
+               
             }
         }
 
@@ -165,6 +188,9 @@
             <br />
 
             <div class="messages">
+                <label for="_salePerson">Sale Person Name: </label>
+                <input type="text" class="_SalePerson" id="_salePerson" placeholder ="Please Inser SalePerson Full Name" style="width:300px; height:30px;"/>
+                <br />
                 <label for="SelectValue">Select Existing Customer ID: </label>
                 <select class="customerSelect" name="SelectValue" style="width: 100%; height: 30px;">
                     <option value="" class="selectionProgramCode">Select Student ID</option>
@@ -206,26 +232,29 @@
             <br />
             <br />
             <div class="messages">
-           
-                    
+
+         
               
                 <form name="sample" method="post" id="sampleForms" style="display:none">
 
                     <h1 style="text-align:center">Process Sale Items</h1>
-                    <table id="cartTable" border="1">
+                    <table id="cartTable" >
                         <tr>
-                            <th> <input type="text" value="Customer ID" class="InputColor" readonly></th>
-                            <th> <input type="text" value="Item Code" class="InputColor" readonly></th>
-                            <th> <input type="text" value="Description" class="InputColor" readonly></th>
-                            <th> <input type="text" value="Unit Price" class="InputColor" readonly></th>
-                            <th> <input type="text" value="Quantity" class="InputColor" readonly></th>
+                            <th><label class="InputColor">Customer ID</label></th>
+                            <th><label class="InputColor">Item Code</label></th>
+                            <th><label class="InputColor">Description</label></th>
+                            <th><label class="InputColor">Unit Price</label></th>
+                            <th><label class="InputColor">Quantity</label></th>
+                            <th><label class="InputColor">SalePerson</label></th>
                         </tr>
+                        <!-- Add more rows and data as needed -->
                     </table>
 
                     <table id="SampleTable">
                         @foreach (var item in Model.ABCSale)
                         {
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -243,7 +272,14 @@
                     <br />
 
                     <input type="submit" value="Process Sale" class="buttons" />
+
                 </form>
+                <section class="messages">
+
+
+                    <h3 class="modelMessage">@Model.Message</h3>
+                </section>
+
              
             </div>
         </div>
